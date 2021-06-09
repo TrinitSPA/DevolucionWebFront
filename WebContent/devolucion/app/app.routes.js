@@ -151,6 +151,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 }
             }
         })
+        .state('reportes', {
+            url: '/reportes',
+            views: {
+                header: {
+                    templateUrl: 'app/components/header/header.html',
+                    controller: 'headerDinamicoCtrl as hdCtrl'                    
+                },
+                content: {
+                    templateUrl: 'app/components/reportes/reportes.html'
+                }
+                ,
+                footer: {
+                    templateUrl: 'app/components/footer-dinamico/footer-dinamico.html'
+                }
+            }
+        })
 
 
 })
