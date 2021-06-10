@@ -55,7 +55,7 @@
 	</div>
 
 
-	<section class="hero-msg">
+	<section class="hero-msg"  ng-style="psCtrl.style.colorFondo2" >
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -63,7 +63,8 @@
 						<div class="col-9">
 							<!-- Texto antes de haer click en editar  -->
 							<div ng-if="!psCtrl.editarTitulo1" class="devolucion-texto d-flex align-items-center">
-								<h2 class="d-inline-block" ng-style="psCtrl.styleTitulo1">{{psCtrl.config.textoTitulo1}}</h2>
+								<h2 class="d-inline-block" ng-style="psCtrl.style.titulo1">
+									{{psCtrl.config.textoTitulo1}}</h2>
 								<div class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
 										<li><a href="" class="text-grey d-block mb-1"
@@ -73,7 +74,8 @@
 											</a>
 										</li>
 										<li>
-											<a class="text-grey d-block" ng-click="psCtrl.editarColorTitulo1()">
+											<a href="" class="text-grey d-block"
+												ng-click="psCtrl.titulo1ColorPicker.open()">
 												<img src="images/cambiar-color.svg" width="16" alt="" class="">
 												<span class="ml-1">Cambiar color</span>
 
@@ -81,7 +83,7 @@
 											<color-picker api="psCtrl.titulo1ColorPicker"
 												ng-model="psCtrl.config.colorTitulo1"
 												event-api="psCtrl.eventAPIColorTitulo1"
-												options="psCtrl.colorPickerOptions"></color-picker>
+												options="psCtrl.colorPickerOptions1"></color-picker>
 
 										</li>
 									</ul>
@@ -134,39 +136,43 @@
 					<div class="row">
 						<div class="col-10">
 							<!-- Texto antes de haer click en editar  -->
-							<div class="devolucion-texto d-flex align-items-center">
-								<h6 class="d-inline-block vertical-align-middle">
-									¿Necesitas realizar una devolución? Completa el siguiente
-									formulario:
+							<div ng-if="!psCtrl.editarTitulo2" class="devolucion-texto d-flex align-items-center">
+								<h6 class="d-inline-block vertical-align-middle" ng-style="psCtrl.style.titulo2">
+									{{psCtrl.config.textoTitulo2}}
 								</h6>
 								<div class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
-										<li><a href="#" class="text-grey d-block mb-1">
+										<li><a href="" class="text-grey d-block mb-1"
+												ng-click="psCtrl.editarTitulo2=true">
 												<img src="images/editar-texto.svg" width="20" alt="">
 												<span>Editar texto</span>
 											</a>
 										</li>
 										<li>
-											<a href="#" class="text-grey d-block">
+											<a href="" class="text-grey d-block"
+												ng-click="psCtrl.titulo2ColorPicker.open()">
 												<img src="images/cambiar-color.svg" width="16" alt="" class="">
 												<span class="ml-1">Cambiar color</span>
 											</a>
+											<color-picker api="psCtrl.titulo2ColorPicker"
+												ng-model="psCtrl.config.colorTitulo2"
+												event-api="psCtrl.eventAPIColorTitulo2"
+												options="psCtrl.colorPickerOptions2"></color-picker>
 										</li>
 									</ul>
 								</div>
 							</div>
 							<!-- Texto despue de ehacer click en editar  -->
-							<div class="devolucion-texto-editar d-none">
+							<div ng-if="psCtrl.editarTitulo2" class="devolucion-texto-editar">
 								<form>
 									<div class="form-group">
-										<input type="email" class="form-control"
-											value="¿Necesitas realizar una devolución? Completa el siguiente formulario:">
+										<input class="form-control" ng-model="psCtrl.temp.textoTitulo2">
 									</div>
 								</form>
 								<div class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
 										<li>
-											<a href="#" class="text-grey d-block">
+											<a href="" class="text-grey d-block" ng-click="psCtrl.guardarTitulo2()">
 												<img src="images/editar-texto.svg" width="27" alt="">
 												<span>Guardar texto</span>
 											</a>
@@ -176,10 +182,13 @@
 							</div>
 						</div>
 						<div class="col-2">
-							<button type="button" class="btn btn-light mt-2">
+							<button type="button" class="btn btn-light mt-2" ng-click="psCtrl.colorFondo2ColorPicker.open()">
 								<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
 								Cambiar color de fondo
 							</button>
+							<color-picker api="psCtrl.colorFondo2ColorPicker" ng-model="psCtrl.config.colorFondo2"
+								event-api="psCtrl.eventAPIColorColorFondo2" options="psCtrl.colorPickerOptionsColorFondo2">
+							</color-picker>
 						</div>
 					</div>
 
