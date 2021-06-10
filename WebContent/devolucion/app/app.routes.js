@@ -138,10 +138,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('personalizar-sitio', {
             url: '/personalizar-sitio',
             views: {
-                header: {
-                    templateUrl: 'app/components/header/header.html',
-                    controller: 'headerDinamicoCtrl as hdCtrl'                    
-                },
                 content: {
                     templateUrl: 'app/components/personalizar-sitio/personalizar-sitio.html'
                 }

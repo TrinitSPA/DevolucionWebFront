@@ -1,0 +1,21 @@
+<div ng-controller="disenoConfigCtrl as dcCtrl" class="clean-body"
+    style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%;">
+
+    <div class="container">
+        <form name="myForm" novalidate>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h4><strong style=" color: #0033a0;">Ingresa tu número de devolución</strong></h4>
+                    <div class="form-group">
+                        <color-picker ng-model="dcCtrl.formData.color" options="dcCtrl.colorPickerOptions"></color-picker>
+                    </div>
+                </div>
+                <div class="col-12 mt-3 mb-4">
+                    <button type="submit" ng-click="dcCtrl.guardar()"
+                        class="btn btn-primary btn-lg btn-block">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

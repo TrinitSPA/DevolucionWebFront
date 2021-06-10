@@ -1,5 +1,60 @@
 <!-- Personalizar sitio  -->
-<div ng-controller="ingresoCtrl as inCtrl" ng-init="inCtrl.ocultar()" class="clean-body m-0 p-0">
+<div ng-controller="personalizarSitioCtrl as psCtrl" class="clean-body m-0 p-0">
+	<div class="container-fluid header-personalizar py-2">
+		<div class="row align-items-center">
+			<div class="col">
+				<h3>Personalizar sitio</h3>
+			</div>
+			<div class="col">
+				<a href="#" class="text-white float-right d-flex align-items-center">
+					<img src="images/sign-out-alt-solid-white.svg" alt="" width="20" class="mr-2 text-white fill-white">
+					Cerrar sesión
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="block-grid w-100 header-sitio-edicion" style="background-color: #134085;">
+		<div class="row py-1 align-items-top">
+			<div class="col-4 num12"
+				style="min-width: 320px; max-width: 800px; display: table-cell; vertical-align: top; width: 800px;">
+				<div style="width:100% !important;">
+					<div
+						style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:10px; padding-bottom:10px; padding-right: 0px; padding-left: 0px;">
+					</div>
+				</div>
+			</div>
+			<div class="col-4 text-center">
+				<a href="http://www.bluex.cl" class="d-inline-block logo-edicion ml-5">
+					<img alt="BluexEspress" class="d-block" src="images/logo-blue.png" title="BluexEspress"
+						height="38" />
+				</a>
+				<div class="card-edicion ml-1">
+					<ul class="list-unstyled text-left">
+						<li>
+							<a href="#" class="text-grey d-block mb-1">
+								<img src="images/subir.svg" width="20" alt="">
+								<span>Subir imagen</span>
+							</a>
+						</li>
+						<li>
+							<a href="#" class="text-grey d-block">
+								<img src="images/eliminar.svg" width="23" alt="" class="ml-n1">
+								<span>Eliminar imagen</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-4 text-right pr-4">
+				<button type="button" class="btn btn-light mt-1">
+					<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
+					Cambiar color de fondo
+				</button>
+			</div>
+		</div>
+	</div>
+
+
 	<section class="hero-msg">
 		<div class="container">
 			<div class="row">
@@ -7,37 +62,44 @@
 					<div class="row">
 						<div class="col-9">
 							<!-- Texto antes de haer click en editar  -->
-							<div class="devolucion-texto d-flex align-items-center">
-								<h2 class="d-inline-block">Devolución Web</h2>
+							<div ng-if="!psCtrl.editarTitulo1" class="devolucion-texto d-flex align-items-center">
+								<h2 class="d-inline-block" ng-style="psCtrl.styleTitulo1">{{psCtrl.config.textoTitulo1}}</h2>
 								<div class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
-										<li><a href="#" class="text-grey d-block mb-1">
-											<img src="images/editar-texto.svg" width="20" alt="">
-											<span>Editar texto</span>
+										<li><a href="" class="text-grey d-block mb-1"
+												ng-click="psCtrl.editarTitulo1=true">
+												<img src="images/editar-texto.svg" width="20" alt="">
+												<span>Editar texto</span>
 											</a>
 										</li>
 										<li>
-											<a href="#" class="text-grey d-block">
+											<a class="text-grey d-block" ng-click="psCtrl.editarColorTitulo1()">
 												<img src="images/cambiar-color.svg" width="16" alt="" class="">
 												<span class="ml-1">Cambiar color</span>
+
 											</a>
+											<color-picker api="psCtrl.titulo1ColorPicker"
+												ng-model="psCtrl.config.colorTitulo1"
+												event-api="psCtrl.eventAPIColorTitulo1"
+												options="psCtrl.colorPickerOptions"></color-picker>
+
 										</li>
 									</ul>
 								</div>
 							</div>
 							<!-- Texto despue de ehacer click en editar  -->
-							<div class="devolucion-texto-editar d-none">
+							<div ng-hide="!psCtrl.editarTitulo1" class="devolucion-texto-editar">
 								<form class="w-50">
 									<div class="form-group mb-1">
-									  <input type="email" class="form-control" id="" value="Devolución web" aria-describedby="emailHelp">
+										<input class="form-control" ng-model="psCtrl.temp.textoTitulo1">
 									</div>
 								</form>
 								<div class="card-edicion mt-1">
 									<ul class="list-unstyled text-left">
 										<li>
-											<a href="#" class="text-grey d-block">
-											<img src="images/editar-texto.svg" width="27" alt="">
-											<span>Guardar texto</span>
+											<a href="" class="text-grey d-block" ng-click="psCtrl.guardarTitulo1()">
+												<img src="images/editar-texto.svg" width="27" alt="">
+												<span>Guardar texto</span>
 											</a>
 										</li>
 									</ul>
@@ -61,7 +123,7 @@
 									</li>
 								</ul>
 							</div>
-							<img src="images/box-header.png"  height="53" alt="" class="mt-n3">
+							<img src="images/box-header.png" height="53" alt="" class="mt-n3">
 						</div>
 					</div>
 				</div>
@@ -80,8 +142,8 @@
 								<div class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
 										<li><a href="#" class="text-grey d-block mb-1">
-											<img src="images/editar-texto.svg" width="20" alt="">
-											<span>Editar texto</span>
+												<img src="images/editar-texto.svg" width="20" alt="">
+												<span>Editar texto</span>
 											</a>
 										</li>
 										<li>
@@ -97,15 +159,16 @@
 							<div class="devolucion-texto-editar d-none">
 								<form>
 									<div class="form-group">
-									  <input type="email" class="form-control" id="" value="¿Necesitas realizar una devolución? Completa el siguiente formulario:">
+										<input type="email" class="form-control"
+											value="¿Necesitas realizar una devolución? Completa el siguiente formulario:">
 									</div>
 								</form>
 								<div class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
 										<li>
 											<a href="#" class="text-grey d-block">
-											<img src="images/editar-texto.svg" width="27" alt="">
-											<span>Guardar texto</span>
+												<img src="images/editar-texto.svg" width="27" alt="">
+												<span>Guardar texto</span>
 											</a>
 										</li>
 									</ul>
@@ -119,7 +182,7 @@
 							</button>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -156,27 +219,27 @@
 							<div class="card-edicion ml-1">
 								<ul class="list-unstyled text-left">
 									<li><a href="#" class="text-grey d-block mb-1">
-										<img src="images/editar-texto.svg" width="20" alt="">
-										<span>Editar texto</span>
+											<img src="images/editar-texto.svg" width="20" alt="">
+											<span>Editar texto</span>
 										</a>
 									</li>
 								</ul>
 							</div>
-						</h5> 
+						</h5>
 					</div>
 					<!-- Texto en modo edicion  -->
 					<div class="col-12 col-md-10 pl-0 edicion-texto-activo pb-3 d-none">
 						<form>
 							<div class="form-group mb-2">
-							  <input type="email" class="form-control" id="" value="DATOS DEL PRODUCTO">
+								<input type="email" class="form-control" id="" value="DATOS DEL PRODUCTO">
 							</div>
 						</form>
 						<div class="card-edicion">
 							<ul class="list-unstyled text-left">
 								<li>
 									<a href="#" class="text-grey d-block">
-									<img src="images/editar-texto.svg" width="27" alt="">
-									<span>Guardar texto</span>
+										<img src="images/editar-texto.svg" width="27" alt="">
+										<span>Guardar texto</span>
 									</a>
 								</li>
 							</ul>
@@ -188,23 +251,20 @@
 								<div class="form-group">
 									<label for="ordenCompra">Número de Orden de Compra*</label> <span
 										class="f-tooltip float-right">i</span> <input type="text" class="form-control"
-										name="ordenCompra" required ng-model="inCtrl.formData.ordenCompra"
-										placeholder="Ej: AC00112233">
+										name="ordenCompra" placeholder="Ej: AC00112233">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="tipoProducto">Tipo de Producto*</label> <input type="text"
-										class="form-control" id="tipoProducto" ng-model="inCtrl.formData.tipoProducto"
-										required placeholder="Ej: Ropa, Electrodomesticos, etc">
+										class="form-control" id="tipoProducto" required
+										placeholder="Ej: Ropa, Electrodomesticos, etc">
 								</div>
 							</div>
 							<div class="col-12 col-md-6">
 								<div class="form-group">
 									<label for="codigoMotivo">Motivo*</label> <select id="codigoMotivo"
-										class="form-control" required ng-init="inCtrl.cargarMotivos()"
-										ng-model="inCtrl.formData.codigoMotivo"
-										ng-options="option.nombreMotivo for option in inCtrl.formData.motivos track by option.codigoMotivo">
+										class="form-control" required>
 									</select>
 								</div>
 							</div>
@@ -212,7 +272,7 @@
 								<p>*Campos obligatorios</p>
 							</div>
 							<div class="col-12">
-								<button ng-click="inCtrl.goPasoDos()" type="button" class="btn btn-primary btn-lg btn-block btn-validar">
+								<button type="button" class="btn btn-primary btn-lg btn-block btn-validar">
 									Validar
 									<div class="card-edicion">
 										<ul class="list-unstyled text-left">
@@ -246,7 +306,8 @@
 					<form action="">
 						<div class="custom-control custom-switch custom-switch-lg custom-control-inline">
 							<input type="checkbox" class="custom-control-input" id="integralo-en-tu-sitio">
-							<label class="custom-control-label text-white" for="integralo-en-tu-sitio">Integralo en tu sitio</label>
+							<label class="custom-control-label text-white" for="integralo-en-tu-sitio">Integralo en tu
+								sitio</label>
 						</div>
 						<div class="custom-control custom-switch custom-control-inline">
 							<input type="checkbox" class="custom-control-input" id="ocultar-edicion">
@@ -255,7 +316,8 @@
 					</form>
 				</div>
 				<div class="col-6 text-right">
-					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#exampleModal">Volver</button>
+					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal"
+						data-target="#exampleModal">Volver</button>
 					<button type="button" class="btn btn-success">Guardar cambios</button>
 				</div>
 			</div>
@@ -264,21 +326,21 @@
 	<!-- Modal salir sin guardar  -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-			<h5 class="modal-title text-body" id="exampleModalLabel">¿Deseas salir sin guardar?</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-body" id="exampleModalLabel">¿Deseas salir sin guardar?</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>No se guardaran los cambios realizados</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary">Salir sin guardar</button>
+				</div>
 			</div>
-			<div class="modal-body">
-			<p>No se guardaran los cambios realizados</p>
-			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-			<button type="button" class="btn btn-primary">Salir sin guardar</button>
-			</div>
-		</div>
 		</div>
 	</div>
 </div>

@@ -6,5 +6,6 @@ var app = angular.module("myApp", [
     'footerDinamicoModule',
     'ingresoModule',
     'loginModule',
-    'productosModule'
+    'productosModule',
+    'personalizarSitioModule'
 ]);

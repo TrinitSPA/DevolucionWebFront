@@ -456,3 +456,11 @@ datepicker{
       transform: scale(1.0);
     }
   }
+
+  #colorPickerTitulo1 {
+    display: none;
+  }
+
+  .color-picker-input-wrapper {
+    display: none !important;
+  }
