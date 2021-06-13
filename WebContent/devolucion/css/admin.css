@@ -457,10 +457,8 @@ datepicker{
     }
   }
 
-  #colorPickerTitulo1 {
+  color-picker {
     display: none;
   }
 
-  .color-picker-input-wrapper {
-    display: none !important;
-  }
+  

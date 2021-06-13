@@ -55,7 +55,7 @@
 	</div>
 
 
-	<section class="hero-msg"  ng-style="psCtrl.style.colorFondo2" >
+	<section class="hero-msg" ng-style="psCtrl.style.colorFondo2">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -75,13 +75,13 @@
 										</li>
 										<li>
 											<a href="" class="text-grey d-block"
-												ng-click="psCtrl.titulo1ColorPicker.open()">
+												ng-click="psCtrl.showTitulo1ColorPicker()">
 												<img src="images/cambiar-color.svg" width="16" alt="" class="">
 												<span class="ml-1">Cambiar color</span>
 
 											</a>
 											<color-picker api="psCtrl.titulo1ColorPicker"
-												ng-model="psCtrl.config.colorTitulo1"
+												ng-model="psCtrl.temp.colorTitulo1"
 												event-api="psCtrl.eventAPIColorTitulo1"
 												options="psCtrl.colorPickerOptions1"></color-picker>
 
@@ -112,10 +112,13 @@
 							<div class="card-edicion ml-1">
 								<ul class="list-unstyled text-left">
 									<li>
-										<a href="#" class="text-grey d-block mb-1">
+										<label style="cursor: pointer;" class="text-grey d-block mb-1"
+											for="inputImagen1">
 											<img src="images/subir.svg" width="20" alt="">
 											<span>Subir imagen</span>
-										</a>
+										</label>
+										<input id="inputImagen1" style="display:none" type='file'
+											ng-model='psCtrl.config.imagen1' base-sixty-four-input>
 									</li>
 									<li>
 										<a href="#" class="text-grey d-block">
@@ -125,7 +128,8 @@
 									</li>
 								</ul>
 							</div>
-							<img src="images/box-header.png" height="53" alt="" class="mt-n3">
+							<img src="{{'data:image/png;base64,' + psCtrl.config.imagen1.base64}}" height="53" alt=""
+								class="mt-n3">
 						</div>
 					</div>
 				</div>
@@ -150,7 +154,7 @@
 										</li>
 										<li>
 											<a href="" class="text-grey d-block"
-												ng-click="psCtrl.titulo2ColorPicker.open()">
+												ng-click="psCtrl.showTitulo2ColorPicker()">
 												<img src="images/cambiar-color.svg" width="16" alt="" class="">
 												<span class="ml-1">Cambiar color</span>
 											</a>
@@ -182,12 +186,14 @@
 							</div>
 						</div>
 						<div class="col-2">
-							<button type="button" class="btn btn-light mt-2" ng-click="psCtrl.colorFondo2ColorPicker.open()">
+							<button type="button" class="btn btn-light mt-2"
+								ng-click="psCtrl.showColorFondo2ColorPicker()">
 								<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
 								Cambiar color de fondo
 							</button>
 							<color-picker api="psCtrl.colorFondo2ColorPicker" ng-model="psCtrl.config.colorFondo2"
-								event-api="psCtrl.eventAPIColorColorFondo2" options="psCtrl.colorPickerOptionsColorFondo2">
+								event-api="psCtrl.eventAPIColorColorFondo2"
+								options="psCtrl.colorPickerOptionsColorFondo2">
 							</color-picker>
 						</div>
 					</div>
@@ -206,10 +212,13 @@
 							<div class="circulo"></div>
 							<div class="linea"></div>
 						</div>
-						<button type="button" class="btn btn-light mt-n3">
+						<button type="button" class="btn btn-light mt-n3" ng-click="psCtrl.colorPasoColorPicker.open()">
 							<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
 							Cambiar color paso 1
 						</button>
+						<color-picker api="psCtrl.colorPasoColorPicker" ng-model="psCtrl.config.colorPaso"
+							event-api="psCtrl.eventAPIColorColorPaso" options="psCtrl.colorPickerOptionsColorPaso">
+						</color-picker>
 					</div>
 					<div class="col-4 px-0">
 						<div class="paso paso-tres align-items-end ">

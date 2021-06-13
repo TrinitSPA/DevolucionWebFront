@@ -1,1 +1,3 @@
-angular.module('personalizarSitioModule', []);
+angular.module('personalizarSitioModule', [
+    'naif.base64'
+]);
