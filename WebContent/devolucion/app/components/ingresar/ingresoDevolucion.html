@@ -40,54 +40,48 @@
 				</div>
 			</section>
 			<section class="inputs-forms mt-1">
-				<div class="row justify-content-center">
+				<div class="row form-inline justify-content-center">
 					<h5 class="col-12 col-md-10 pl-0">DATOS DEL PRODUCTO</h5>
-					<div class="col-12 col-md-10 px-5 py-2 card-white pb-4">
-						<div class="row justify-content-center">
-							<div class="col-12 col-md-6">
+					<div class="col-12 col-md-10 px-5 pt-3 card-white pb-4">
+						<div class="row">
+							<div class="col-12 mb-3">
 								<div class="form-group">
-									<label for="ordenCompra">Número de Orden de Compra*</label> <span
-										class="f-tooltip float-right">i</span> <input type="text" class="form-control"
+									<label for="ordenCompra" class="col-4 justify-content-start">Número de Orden de Compra* <span
+										class="f-tooltip float-right ">i</span> </label>
+									<input type="text" class="form-control col-6 justify-content-start"
 										name="ordenCompra" required ng-model="inCtrl.formData.ordenCompra"
 										placeholder="Ej: AC00112233">
 								</div>
 							</div>
-							<div class="col-12 col-md-6">
+							<div class="col-12 mb-3">
 								<div class="form-group">
-									<label for="tipoProducto">Tipo de Producto*</label> <input type="text"
-										class="form-control" id="tipoProducto" ng-model="inCtrl.formData.tipoProducto"
+									<label for="tipoProducto" class="col-4 justify-content-start">Tipo de Producto*</label> 
+									<input type="text"
+										class="form-control col-6 justify-content-start" id="tipoProducto" ng-model="inCtrl.formData.tipoProducto"
 										required placeholder="Ej: Ropa, Electrodomesticos, etc">
 								</div>
 							</div>
-							<!-- <div class="col-12 col-md-6">
+							</div>
+							<div class="col-12">
 								<div class="form-group">
-									<label for="codigoEmpresa">Empresa*</label> <select id="codigoEmpresa"
-										class="form-control" required ng-init="inCtrl.cargarEcommerces()"
-										ng-model="inCtrl.formData.codigoEmpresa"
-										ng-options="option.nombreEmpresa for option in inCtrl.formData.eCommerce track by option.codigoEmpresa">
-									</select>
-								</div>
-							</div> -->
-							<div class="col-12 col-md-6">
-								<div class="form-group">
-									<label for="codigoMotivo">Motivo*</label> <select id="codigoMotivo"
-										class="form-control" required ng-init="inCtrl.cargarMotivos()"
+									<label for="codigoMotivo" class="col-4 justify-content-start">Motivo*</label> 
+									<select id="codigoMotivo"
+										class="form-control col-6 justify-content-start" required ng-init="inCtrl.cargarMotivos()"
 										ng-model="inCtrl.formData.codigoMotivo"
 										ng-options="option.nombreMotivo for option in inCtrl.formData.motivos track by option.codigoMotivo">
 									</select>
 								</div>
 							</div>
-							<div class="col-12 col-sm-12 text-right">
+							<div class="col-10 text-right">
 								<p>*Campos obligatorios</p>
 							</div>
-							<div class="col-12 col-sm-12">
+							<div class="col-12">
 								<button ng-click="inCtrl.goPasoDos()" type="button"
 									class="btn btn-primary btn-lg btn-block">Validar</button>
 							</div>
 						</div>
 					</div>
 				</div>
-
 			</section>
 		</div>
 	</form>
