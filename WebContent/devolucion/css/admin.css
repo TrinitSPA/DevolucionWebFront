@@ -31,7 +31,8 @@ hr {
 .etapas .paso.active .circulo,
 .etapas .paso.done .circulo {
     background: #39c0e0;
-    border: solid 12px #c0e5f1;
+    border: solid 12px #5ad2f9e6;
+    background-clip: padding-box;
 }
 
 .etapas .paso.active .circulo:before,
