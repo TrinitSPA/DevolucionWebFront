@@ -16,9 +16,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 content: {
                     templateUrl: 'app/components/productos/lista-productos/lista-productos.html',
                     css: 'app/components/productos/lista-productos/lista-productos.css'
-                },
-                footer: {
-                    templateUrl: 'app/components/footer/footer.html'
                 }
             }
         })
@@ -30,9 +27,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 },
                 content: {
                     templateUrl: 'app/components/productos/detalle-producto/detalle-producto.html'
-                },
-                footer: {
-                    templateUrl: 'app/components/footer/footer.html'
                 }
             }
         })
@@ -44,9 +38,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 },
                 content: {
                     templateUrl: 'app/components/login/login.html'
-                },
-                footer: {
-                    templateUrl: 'app/components/footer/footer.html'
                 }
             }
         })
@@ -58,9 +49,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 },
                 content: {
                     templateUrl: 'app/components/consultar/buscarDevolucion.html'
-                },
-                footer: {
-                    templateUrl: 'app/components/footer/footer.html'
                 }
             }
         })
@@ -73,9 +61,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 },
                 content: {
                     templateUrl: 'app/components/ingresar/ingresoDevolucion.html'
-                },
-                footer: {
-                    templateUrl: 'app/components/footer-dinamico/footer-dinamico.html'
                 }
             }
         })
@@ -97,10 +82,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 content: {
                     templateUrl: 'app/components/dashboard/dashboard.html'
                 }
-                ,
-                footer: {
-                    templateUrl: 'app/components/footer-dinamico/footer-dinamico.html'
-                }
+                
             }
         })
         .state('generar-reporte', {
@@ -113,10 +95,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 content: {
                     templateUrl: 'app/components/generar-reporte/generar-reporte.html'
                 }
-                ,
-                footer: {
-                    templateUrl: 'app/components/footer-dinamico/footer-dinamico.html'
-                }
+                
             }
         })
         .state('panel-admin', {
@@ -129,10 +108,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 content: {
                     templateUrl: 'app/components/panel-admin/panel-admin.html'
                 }
-                ,
-                footer: {
-                    templateUrl: 'app/components/footer-dinamico/footer-dinamico.html'
-                }
+                
             }
         })
         .state('personalizar-sitio', {
@@ -141,10 +117,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 content: {
                     templateUrl: 'app/components/personalizar-sitio/personalizar-sitio.html'
                 }
-                ,
-                footer: {
-                    templateUrl: 'app/components/footer-dinamico/footer-dinamico.html'
-                }
+                
             }
         })
         .state('reportes', {
@@ -157,10 +130,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 content: {
                     templateUrl: 'app/components/reportes/reportes.html'
                 }
-                ,
-                footer: {
-                    templateUrl: 'app/components/footer-dinamico/footer-dinamico.html'
-                }
+                
             }
         })
 
