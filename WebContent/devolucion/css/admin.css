@@ -28,11 +28,22 @@ hr {
     position: relative;
 }
 
-.etapas .paso.active .circulo,
-.etapas .paso.done .circulo {
+.personalizar-sitio .etapas .paso.active .circulo,
+.personalizar-sitio .etapas .paso.done .circulo {
     background: #39c0e0;
     border: solid 12px #5ad2f9e6;
     background-clip: padding-box;
+}
+
+.personalizar-sitio .etapas .paso.active .circulo:before,
+.personalizar-sitio .etapas .paso.done .circulo:before {
+    content: '';
+    background: url("../images/arrowright.svg");
+    width: 15px;
+    display: block;
+    height: 15px;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 .etapas .paso.active .circulo:before,
@@ -47,7 +58,9 @@ hr {
 }
 
 .etapas .paso.active h5,
-.etapas .paso.done h5 {
+.etapas .paso.done h5,
+.etapas .paso.active h6,
+.etapas .paso.done h6 {
     color: #39c0e0;
 }
 
@@ -71,6 +84,16 @@ hr {
     }
 }
 
+.personalizar-sitio .etapas .paso .circulo {
+    width: 45px;
+    height: 45px;
+    display: block;
+    border-radius: 50%;
+    background: #fff;
+    border: solid 4px #e2e0e0;
+    z-index: 2;
+}
+
 .etapas .paso .circulo {
     width: 50px;
     height: 50px;
@@ -80,6 +103,7 @@ hr {
     border: solid 4px #e2e0e0;
     z-index: 2;
 }
+
 
 .etapas .paso .linea {
     transform: translateY(-37px);
@@ -371,7 +395,7 @@ datepicker{
    background-color: #212121;
 }
 
-.header-personalizar h3 {
+.header-personalizar h4 {
     color: #fff;
 }
 
@@ -411,9 +435,9 @@ datepicker{
     width: 100%;
     background:#343333;
     z-index: 10;
-    -webkit-box-shadow: 0px -27px 60px -40px rgba(0,0,0,0.67);
-    -moz-box-shadow: 0px -27px 60px -40px rgba(0,0,0,0.67);
-    box-shadow: 0px -27px 60px -40px rgba(0,0,0,0.67);
+    -webkit-box-shadow: 0px -4px 18px -8px rgba(140,140,140,1);
+    -moz-box-shadow: 0px -4px 18px -8px rgba(140,140,140,1);
+    box-shadow: 0px -4px 18px -8px rgba(140,140,140,1);    
 }
 
 .spinner-button {
@@ -462,4 +486,10 @@ datepicker{
     display: none;
   }
 
-  
+  .color-picker-input-wrapper{
+      padding: 9px 0;
+  }
+
+  .color-picker-wrapper .color-picker-panel{
+    box-shadow: 0 0 6px rgb(0 0 0 / 50%)!important;
+}

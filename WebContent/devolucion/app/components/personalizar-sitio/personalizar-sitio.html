@@ -1,9 +1,9 @@
 <!-- Personalizar sitio  -->
-<div ng-controller="personalizarSitioCtrl as psCtrl" class="clean-body m-0 p-0">
+<div ng-controller="personalizarSitioCtrl as psCtrl" class="clean-body m-0 p-0 personalizar-sitio">
 	<div class="container-fluid header-personalizar py-2">
 		<div class="row align-items-center">
 			<div class="col">
-				<h3>Personalizar sitio</h3>
+				<h4>Personalizar sitio</h4>
 			</div>
 			<div class="col">
 				<a href="#" class="text-white float-right d-flex align-items-center">
@@ -26,7 +26,7 @@
 			<div class="col-4 text-center">
 				<a href="http://www.bluex.cl" class="d-inline-block logo-edicion ml-5">
 					<img alt="BluexEspress" class="d-block" src="images/logo-blue.png" title="BluexEspress"
-						height="38" />
+						height="38" width="60"/>
 				</a>
 				<div class="card-edicion ml-1">
 					<ul class="list-unstyled text-left">
@@ -128,7 +128,7 @@
 									</li>
 								</ul>
 							</div>
-							<img src="{{'data:image/png;base64,' + psCtrl.config.imagen1.base64}}" height="53" alt=""
+							<img src="{{'data:image/png;base64,' + psCtrl.config.imagen1.base64}}" width="54" height="53" alt=""
 								class="mt-n3">
 						</div>
 					</div>
@@ -208,7 +208,7 @@
 				<div class="row justify-content-center mb-5 mt-2">
 					<div class="col-4 pr-0">
 						<div class="paso paso-uno align-items-start active">
-							<h5>PASO 1</h5>
+							<h6>PASO 1</h6>
 							<div class="circulo"></div>
 							<div class="linea"></div>
 						</div>
@@ -222,7 +222,7 @@
 					</div>
 					<div class="col-4 px-0">
 						<div class="paso paso-tres align-items-end ">
-							<h5>PASO 2</h5>
+							<h6>PASO 2</h6>
 							<div class="circulo"></div>
 							<div class="linea"></div>
 						</div>
@@ -243,6 +243,18 @@
 									</li>
 								</ul>
 							</div>
+							<div class="card-edicion ml-auto col-2" style="min-width: 210px;
+							padding: 10px;">
+								<ul class="list-unstyled text-left">
+									<li>
+										<a href="" class="text-grey d-block"
+											ng-click="psCtrl.showTitulo2ColorPicker()">
+											<img src="images/cambiar-color.svg" width="16" alt="" class="">
+											<span class="ml-1">Cambiar color de fondo</span>
+										</a>
+									</li>
+								</ul>
+							</div>	
 						</h5>
 					</div>
 					<!-- Texto en modo edicion  -->
