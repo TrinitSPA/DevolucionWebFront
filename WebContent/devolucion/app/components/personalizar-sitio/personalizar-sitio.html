@@ -13,7 +13,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="block-grid w-100 header-sitio-edicion" style="background-color: #134085;">
+	<div class="block-grid w-100 header-sitio-edicion" ng-style="psCtrl.style.colorFondo1">
 		<div class="row py-1 align-items-top">
 			<div class="col-4 num12"
 				style="min-width: 320px; max-width: 800px; display: table-cell; vertical-align: top; width: 800px;">
@@ -25,19 +25,22 @@
 			</div>
 			<div class="col-4 text-center">
 				<a href="http://www.bluex.cl" class="d-inline-block logo-edicion ml-5">
-					<img alt="BluexEspress" class="d-block" src="images/logo-blue.png" title="BluexEspress"
-						height="38" width="60"/>
+					<img alt="BluexEspress" class="d-block" ng-if="psCtrl.config.imagen2"
+						ng-src="{{'data:image/png;base64,' + psCtrl.config.imagen2.base64}}" title="BluexEspress"
+						height="38" width="60" />
 				</a>
 				<div class="card-edicion ml-1">
 					<ul class="list-unstyled text-left">
 						<li>
-							<a href="#" class="text-grey d-block mb-1">
+							<label for="inputImagen2" class="text-grey d-block mb-1">
 								<img src="images/subir.svg" width="20" alt="">
 								<span>Subir imagen</span>
-							</a>
+							</label>
+							<input id="inputImagen2" style="display:none" type='file' ng-model='psCtrl.config.imagen2'
+								base-sixty-four-input>
 						</li>
 						<li>
-							<a href="#" class="text-grey d-block">
+							<a href="" class="text-grey d-block" ng-click="">
 								<img src="images/eliminar.svg" width="23" alt="" class="ml-n1">
 								<span>Eliminar imagen</span>
 							</a>
@@ -46,10 +49,12 @@
 				</div>
 			</div>
 			<div class="col-4 text-right pr-4">
-				<button type="button" class="btn btn-light mt-1">
+				<button type="button" class="btn btn-light mt-1" ng-click="psCtrl.showColorFondo1ColorPicker()">
 					<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
 					Cambiar color de fondo
 				</button>
+				<color-picker api="psCtrl.colorFondo1ColorPicker" ng-model="psCtrl.config.colorFondo1"
+					event-api="psCtrl.eventAPIColorColorFondo1" options="psCtrl.colorPickerOptionsColorFondo1"></color-picker>
 			</div>
 		</div>
 	</div>
@@ -81,7 +86,7 @@
 
 											</a>
 											<color-picker api="psCtrl.titulo1ColorPicker"
-												ng-model="psCtrl.temp.colorTitulo1"
+												ng-model="psCtrl.config.colorTitulo1"
 												event-api="psCtrl.eventAPIColorTitulo1"
 												options="psCtrl.colorPickerOptions1"></color-picker>
 
@@ -121,15 +126,16 @@
 											ng-model='psCtrl.config.imagen1' base-sixty-four-input>
 									</li>
 									<li>
-										<a href="#" class="text-grey d-block">
+										<a href="" class="text-grey d-block" ng-click="psCtrl.config.imagen1=''">
 											<img src="images/eliminar.svg" width="23" alt="" class="ml-n1">
 											<span>Eliminar imagen</span>
 										</a>
 									</li>
 								</ul>
 							</div>
-							<img src="{{'data:image/png;base64,' + psCtrl.config.imagen1.base64}}" width="54" height="53" alt=""
-								class="mt-n3">
+							<img ng-if="psCtrl.config.imagen1"
+								ng-src="{{'data:image/png;base64,' + psCtrl.config.imagen1.base64}}" width="54"
+								height="53" alt="" class="mt-n3">
 						</div>
 					</div>
 				</div>
@@ -208,16 +214,16 @@
 				<div class="row justify-content-center mb-5 mt-2">
 					<div class="col-4 pr-0">
 						<div class="paso paso-uno align-items-start active">
-							<h6>PASO 1</h6>
-							<div class="circulo"></div>
+							<h6 ng-style="psCtrl.style.colorPasoTexto">PASO 1</h6>
+							<div ng-style="psCtrl.style.colorPasoCirculo" class="circulo"></div>
 							<div class="linea"></div>
 						</div>
-						<button type="button" class="btn btn-light mt-n3" ng-click="psCtrl.colorPasoColorPicker.open()">
+						<button type="button" class="btn btn-light mt-n3" ng-click="psCtrl.showColorPasoColorPicker()">
 							<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
 							Cambiar color paso 1
 						</button>
 						<color-picker api="psCtrl.colorPasoColorPicker" ng-model="psCtrl.config.colorPaso"
-							event-api="psCtrl.eventAPIColorColorPaso" options="psCtrl.colorPickerOptionsColorPaso">
+							event-api="psCtrl.eventAPIColorPaso" options="psCtrl.colorPickerOptionsColorPaso">
 						</color-picker>
 					</div>
 					<div class="col-4 px-0">
@@ -247,14 +253,13 @@
 							padding: 10px;">
 								<ul class="list-unstyled text-left">
 									<li>
-										<a href="" class="text-grey d-block"
-											ng-click="psCtrl.showTitulo2ColorPicker()">
+										<a href="" class="text-grey d-block" ng-click="psCtrl.showTitulo2ColorPicker()">
 											<img src="images/cambiar-color.svg" width="16" alt="" class="">
 											<span class="ml-1">Cambiar color de fondo</span>
 										</a>
 									</li>
 								</ul>
-							</div>	
+							</div>
 						</h5>
 					</div>
 					<!-- Texto en modo edicion  -->
@@ -279,8 +284,8 @@
 						<div class="row">
 							<div class="col-12 mb-3">
 								<div class="form-group">
-									<label for="ordenCompra" class="col-4 justify-content-start">Número de Orden de Compra* <span
-										class="f-tooltip float-right ">i</span> </label>
+									<label for="ordenCompra" class="col-4 justify-content-start">Número de Orden de
+										Compra* <span class="f-tooltip float-right ">i</span> </label>
 									<input type="text" class="form-control col-6 justify-content-start"
 										name="ordenCompra" required ng-model="inCtrl.formData.ordenCompra"
 										placeholder="Ej: AC00112233">
@@ -288,96 +293,96 @@
 							</div>
 							<div class="col-12 mb-3">
 								<div class="form-group">
-									<label for="tipoProducto" class="col-4 justify-content-start">Tipo de Producto*</label> 
-									<input type="text"
-										class="form-control col-6 justify-content-start" id="tipoProducto" ng-model="inCtrl.formData.tipoProducto"
-										required placeholder="Ej: Ropa, Electrodomesticos, etc">
+									<label for="tipoProducto" class="col-4 justify-content-start">Tipo de
+										Producto*</label>
+									<input type="text" class="form-control col-6 justify-content-start"
+										id="tipoProducto" ng-model="inCtrl.formData.tipoProducto" required
+										placeholder="Ej: Ropa, Electrodomesticos, etc">
 								</div>
 							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<label for="codigoMotivo" class="col-4 justify-content-start">Motivo*</label>
+								<select id="codigoMotivo" class="form-control col-6 justify-content-start" required
+									ng-init="inCtrl.cargarMotivos()" ng-model="inCtrl.formData.codigoMotivo"
+									ng-options="option.nombreMotivo for option in inCtrl.formData.motivos track by option.codigoMotivo">
+								</select>
 							</div>
-							<div class="col-12">
-								<div class="form-group">
-									<label for="codigoMotivo" class="col-4 justify-content-start">Motivo*</label> 
-									<select id="codigoMotivo"
-										class="form-control col-6 justify-content-start" required ng-init="inCtrl.cargarMotivos()"
-										ng-model="inCtrl.formData.codigoMotivo"
-										ng-options="option.nombreMotivo for option in inCtrl.formData.motivos track by option.codigoMotivo">
-									</select>
+						</div>
+						<div class="col-10 text-right">
+							<p>*Campos obligatorios</p>
+						</div>
+						<div class="col-12 col-md-12">
+							<button type="button" class="btn btn-primary btn-lg btn-block btn-validar">
+								Validar
+								<div class="card-edicion">
+									<ul class="list-unstyled text-left">
+										<li>
+											<a href="#" class="text-grey d-block">
+												<img src="images/cambiar-color.svg" width="16" alt="" class="">
+												<span class="ml-1">Cambiar color</span>
+											</a>
+										</li>
+									</ul>
 								</div>
-							</div>
-							<div class="col-10 text-right">
-								<p>*Campos obligatorios</p>
-							</div>
-							<div class="col-12 col-md-12">
-								<button type="button" class="btn btn-primary btn-lg btn-block btn-validar">
-									Validar
-									<div class="card-edicion">
-										<ul class="list-unstyled text-left">
-											<li>
-												<a href="#" class="text-grey d-block">
-													<img src="images/cambiar-color.svg" width="16" alt="" class="">
-													<span class="ml-1">Cambiar color</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</button>
-								<!-- boton loading  -->
-								<button type="button" class="btn btn-primary btn-lg btn-block btn-validar">
-									<div class="spinner-button">
-										<div class="bounce1"></div>
-										<div class="bounce2"></div>
-										<div class="bounce3"></div>
-									</div>
-								</button>
-							</div>
+							</button>
+							<!-- boton loading  -->
+							<button type="button" class="btn btn-primary btn-lg btn-block btn-validar">
+								<div class="spinner-button">
+									<div class="bounce1"></div>
+									<div class="bounce2"></div>
+									<div class="bounce3"></div>
+								</div>
+							</button>
 						</div>
 					</div>
 				</div>
+		</div>
 
-			</section>
+		</section>
+</div>
+<div class="barra-follower">
+	<div class="row px-4 py-3">
+		<div class="col-6 pt-1 pl-4">
+			<form action="">
+				<div class="custom-control custom-switch custom-switch-lg custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="integralo-en-tu-sitio">
+					<label class="custom-control-label text-white" for="integralo-en-tu-sitio">Integralo en tu
+						sitio</label>
+				</div>
+				<div class="custom-control custom-switch custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="ocultar-edicion">
+					<label class="custom-control-label text-white" for="ocultar-edicion">Ocultar edición</label>
+				</div>
+			</form>
 		</div>
-		<div class="barra-follower">
-			<div class="row px-4 py-3">
-				<div class="col-6 pt-1 pl-4">
-					<form action="">
-						<div class="custom-control custom-switch custom-switch-lg custom-control-inline">
-							<input type="checkbox" class="custom-control-input" id="integralo-en-tu-sitio">
-							<label class="custom-control-label text-white" for="integralo-en-tu-sitio">Integralo en tu
-								sitio</label>
-						</div>
-						<div class="custom-control custom-switch custom-control-inline">
-							<input type="checkbox" class="custom-control-input" id="ocultar-edicion">
-							<label class="custom-control-label text-white" for="ocultar-edicion">Ocultar edición</label>
-						</div>
-					</form>
-				</div>
-				<div class="col-6 text-right">
-					<button type="button" class="btn btn-secondary mr-2" data-toggle="modal"
-						data-target="#exampleModal">Volver</button>
-					<button type="button" class="btn btn-success">Guardar cambios</button>
-				</div>
+		<div class="col-6 text-right">
+			<button type="button" class="btn btn-secondary mr-2" data-toggle="modal"
+				data-target="#exampleModal">Volver</button>
+			<button type="button" class="btn btn-success">Guardar cambios</button>
+		</div>
+	</div>
+</div>
+</form>
+<!-- Modal salir sin guardar  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-body" id="exampleModalLabel">¿Deseas salir sin guardar?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
-		</div>
-	</form>
-	<!-- Modal salir sin guardar  -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title text-body" id="exampleModalLabel">¿Deseas salir sin guardar?</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>No se guardaran los cambios realizados</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-					<button type="button" class="btn btn-primary">Salir sin guardar</button>
-				</div>
+			<div class="modal-body">
+				<p>No se guardaran los cambios realizados</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary">Salir sin guardar</button>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
