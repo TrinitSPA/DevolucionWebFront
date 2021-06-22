@@ -1,5 +1,10 @@
 <!-- Personalizar sitio  -->
-<div ng-controller="personalizarSitioCtrl as psCtrl" class="clean-body m-0 p-0 personalizar-sitio">
+<div class="clean-body m-0 p-0 personalizar-sitio">
+	<!--
+	<style>
+		.colorBoton { background-color: {{"#" + psCtrl.config.colorBoton}}; }
+	</style>
+	-->
 	<div class="container-fluid header-personalizar py-2">
 		<div class="row align-items-center">
 			<div class="col">
@@ -54,7 +59,8 @@
 					Cambiar color de fondo
 				</button>
 				<color-picker api="psCtrl.colorFondo1ColorPicker" ng-model="psCtrl.config.colorFondo1"
-					event-api="psCtrl.eventAPIColorColorFondo1" options="psCtrl.colorPickerOptionsColorFondo1"></color-picker>
+					event-api="psCtrl.eventAPIColorColorFondo1" options="psCtrl.colorPickerOptionsColorFondo1">
+				</color-picker>
 			</div>
 		</div>
 	</div>
@@ -208,8 +214,8 @@
 			</div>
 		</div>
 	</section>
-	<form name="myForm">
-		<div class="container mb-5" id="paso1" name="paso1">
+	<form name="myForm" ng-style="psCtrl.style.colorFondo3">
+		<div class="container mb-5" id="paso1" name="paso1" ng-style="psCtrl.style.colorFondo3">
 			<section class="etapas">
 				<div class="row justify-content-center mb-5 mt-2">
 					<div class="col-4 pr-0">
@@ -238,11 +244,11 @@
 			<section class="inputs-forms mt-1">
 				<div class="row form-inline justify-content-center">
 					<!-- Texto sin editar  -->
-					<div class="edicion-texto col-12 col-md-10 pl-0 mt-n4">
-						<h5 class="d-flex align-items-center">DATOS DEL PRODUCTO
+					<div ng-if="!psCtrl.editarTitulo3" class="edicion-texto col-12 col-md-10 pl-0 mt-n4">
+						<h5 class="d-flex align-items-center">{{psCtrl.config.textoTitulo3}}
 							<div class="card-edicion ml-1">
 								<ul class="list-unstyled text-left">
-									<li><a href="#" class="text-grey d-block mb-1">
+									<li><a href="" class="text-grey d-block mb-1" ng-click="psCtrl.editarTitulo3=true">
 											<img src="images/editar-texto.svg" width="20" alt="">
 											<span>Editar texto</span>
 										</a>
@@ -253,26 +259,30 @@
 							padding: 10px;">
 								<ul class="list-unstyled text-left">
 									<li>
-										<a href="" class="text-grey d-block" ng-click="psCtrl.showTitulo2ColorPicker()">
+										<a href="" class="text-grey d-block" ng-click="psCtrl.showColorFondo3ColorPicker()">
 											<img src="images/cambiar-color.svg" width="16" alt="" class="">
 											<span class="ml-1">Cambiar color de fondo</span>
 										</a>
+										<color-picker api="psCtrl.colorFondo3ColorPicker"
+												ng-model="psCtrl.config.colorFondo3"
+												event-api="psCtrl.eventAPIColorColorFondo3"
+												options="psCtrl.colorPickerOptionsColorFondo3"></color-picker>
 									</li>
 								</ul>
 							</div>
 						</h5>
 					</div>
 					<!-- Texto en modo edicion  -->
-					<div class="col-12 col-md-10 pl-0 edicion-texto-activo pb-3 d-none">
+					<div ng-hide="!psCtrl.editarTitulo3" class="col-12 col-md-10 pl-0 edicion-texto-activo pb-3">
 						<form>
 							<div class="form-group mb-2">
-								<input type="email" class="form-control" id="" value="DATOS DEL PRODUCTO">
+								<input class="form-control" id="" ng-model="psCtrl.temp.textoTitulo3">
 							</div>
 						</form>
 						<div class="card-edicion">
 							<ul class="list-unstyled text-left">
 								<li>
-									<a href="#" class="text-grey d-block">
+									<a href="" class="text-grey d-block" ng-click="psCtrl.guardarTitulo3()">
 										<img src="images/editar-texto.svg" width="27" alt="">
 										<span>Guardar texto</span>
 									</a>
@@ -314,15 +324,19 @@
 							<p>*Campos obligatorios</p>
 						</div>
 						<div class="col-12 col-md-12">
-							<button type="button" class="btn btn-primary btn-lg btn-block btn-validar">
+							<button type="button" class="btn btn-primary btn-lg btn-block btn-validar colorBoton" ng-style="psCtrl.style.colorBoton">
 								Validar
 								<div class="card-edicion">
 									<ul class="list-unstyled text-left">
 										<li>
-											<a href="#" class="text-grey d-block">
+											<a href="" class="text-grey d-block" ng-click="psCtrl.showColorBotonColorPicker()">
 												<img src="images/cambiar-color.svg" width="16" alt="" class="">
 												<span class="ml-1">Cambiar color</span>
 											</a>
+											<color-picker api="psCtrl.colorBotonColorPicker"
+												ng-model="psCtrl.config.colorBoton"
+												event-api="psCtrl.eventAPIColorBoton"
+												options="psCtrl.colorPickerOptionsColorBoton"></color-picker>
 										</li>
 									</ul>
 								</div>
@@ -360,7 +374,14 @@
 		<div class="col-6 text-right">
 			<button type="button" class="btn btn-secondary mr-2" data-toggle="modal"
 				data-target="#exampleModal">Volver</button>
-			<button type="button" class="btn btn-success">Guardar cambios</button>
+			<button ng-if="!psCtrl.loadingGuardar" type="button" class="btn btn-success" ng-click="psCtrl.guardar()">Guardar cambios</button>
+			<button ng-if="psCtrl.loadingGuardar" type="button" class="btn btn-success">
+				<div class="spinner-button">
+					<div class="bounce1"></div>
+					<div class="bounce2"></div>
+					<div class="bounce3"></div>
+				</div>
+			</button>
 		</div>
 	</div>
 </div>

@@ -7,14 +7,18 @@ angular.module('personalizarSitioModule')
             '$location',
             function ($scope, $http, $state, loginService, $location) {
                 var vm = this;
+                const host = $location.protocol() + '://' + $location.host() + ':' + $location.port();
 
                 vm.editarTitulo1, vm.editarTitulo2, vm.editarTitulo3 = false;
+                vm.loadingGuardar = false;
 
                 vm.colorPickerOptions1 = generateColorOption('colorPickerTitulo1');
                 vm.colorPickerOptions2 = generateColorOption('colorPickerTitulo2');
                 vm.colorPickerOptionsColorFondo1 = generateColorOption('colorPickerColorFondo1');
                 vm.colorPickerOptionsColorFondo2 = generateColorOption('colorPickerColorFondo2');
+                vm.colorPickerOptionsColorFondo3 = generateColorOption('colorPickerColorFondo3');
                 vm.colorPickerOptionsColorPaso = generateColorOption('colorPickerColorPaso');
+                vm.colorPickerOptionsColorBoton = generateColorOption('colorPickerColorBoton');
 
                 vm.config = {
                     textoTitulo1: "Devolución Web",
@@ -29,7 +33,10 @@ angular.module('personalizarSitioModule')
                     imagen2: {
                         base64: imagen2
                     },
-                    colorPaso: "39c0e0"
+                    colorPaso: "39c0e0",
+                    textoTitulo3: "DATOS DEL PRODUCTO",
+                    colorFondo3: "f4f4f4",
+                    colorBoton: "0033a0",
                 }
 
                 vm.style = {
@@ -45,18 +52,26 @@ angular.module('personalizarSitioModule')
                     colorFondo2: {
                         background: "#" + vm.config.colorFondo2
                     },
+                    colorFondo3: {
+                        background: "#" + vm.config.colorFondo3
+                    },
                     colorPasoTexto: {
                         color: "#" + vm.config.colorPaso
                     },
                     colorPasoCirculo: {
                         background: "#" + vm.config.colorPaso,
-                        "border-color":"#" + vm.config.colorPaso
+                        "border-color": "#" + vm.config.colorPaso
+                    },
+                    colorBoton: {
+                        "background-color": "#" + vm.config.colorBoton,
+                        "border-color": "#" + vm.config.colorBoton
                     }
                 }
 
                 vm.temp = {
-                    textoTitulo1: "Devolución Web",
-                    textoTitulo2: "¿Necesitas realizar una devolución? Completa el siguiente formulario:"                    
+                    textoTitulo1: vm.config.textoTitulo1,
+                    textoTitulo2: vm.config.textoTitulo2,
+                    textoTitulo3: vm.config.textoTitulo3
                 }
 
                 vm.guardarTitulo1 = function () {
@@ -66,7 +81,12 @@ angular.module('personalizarSitioModule')
 
                 vm.guardarTitulo2 = function () {
                     vm.config.textoTitulo2 = angular.copy(vm.temp.textoTitulo2);
-                    vm.editarTitulo2 = false                  
+                    vm.editarTitulo2 = false
+                }
+
+                vm.guardarTitulo3 = function () {
+                    vm.config.textoTitulo3 = angular.copy(vm.temp.textoTitulo3);
+                    vm.editarTitulo3 = false
                 }
 
                 vm.eventAPIColorTitulo1 = {
@@ -101,12 +121,30 @@ angular.module('personalizarSitioModule')
                     }
                 }
 
+                vm.eventAPIColorColorFondo3 = {
+                    onClose: function (api, color, $event) {
+                        vm.config.colorFondo3 = color
+                        vm.style.colorFondo3.background = "#" + color
+                        vm.colorFondo3ColorPicker.getElement()[0].style.display = "none"
+                    }
+                }
+
                 vm.eventAPIColorPaso = {
                     onClose: function (api, color, $event) {
                         vm.config.colorPaso = color
                         vm.style.colorPasoTexto.color = "#" + color
                         vm.style.colorPasoCirculo.background = "#" + color
                         vm.style.colorPasoCirculo["border-color"] = "#" + color
+                        vm.colorPasoColorPicker.getElement()[0].style.display = "none"
+                    }
+                }
+
+                vm.eventAPIColorBoton = {
+                    onClose: function (api, color, $event) {
+                        vm.config.colorBoton = color
+                        vm.style.colorBoton["background-color"] = "#" + color
+                        vm.style.colorBoton["border-color"] = "#" + color
+                        vm.colorBotonColorPicker.getElement()[0].style.display = "none"
                     }
                 }
 
@@ -130,9 +168,32 @@ angular.module('personalizarSitioModule')
                     vm.colorFondo2ColorPicker.open()
                 }
 
+                vm.showColorFondo3ColorPicker = function () {
+                    vm.colorFondo3ColorPicker.getElement()[0].style.display = 'inline';
+                    vm.colorFondo3ColorPicker.open()
+                }
+
                 vm.showColorPasoColorPicker = function () {
                     vm.colorPasoColorPicker.getElement()[0].style.display = 'inline';
                     vm.colorPasoColorPicker.open()
+                }
+
+                vm.showColorBotonColorPicker = function () {
+                    vm.colorBotonColorPicker.getElement()[0].style.display = 'inline';
+                    vm.colorBotonColorPicker.open()
+                }
+
+                vm.guardar = function () {
+                    vm.loadingGuardar = true;
+                    $http.post(host + '/devolucionRest/rest/logistica/personalizar/', vm.config)
+                        .success(function (data) {
+                            console.log(data)
+                            vm.loadingGuardar = false;
+                        })
+                        .error(function (data) {
+                            console.log('Error:' + data);
+                            vm.loadingGuardar = false;
+                        });
                 }
             }]);
 
