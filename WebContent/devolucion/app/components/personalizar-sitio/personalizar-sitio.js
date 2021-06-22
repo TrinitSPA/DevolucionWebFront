@@ -59,6 +59,16 @@ angular.module('personalizarSitioModule')
                     textoTitulo2: "¿Necesitas realizar una devolución? Completa el siguiente formulario:"                    
                 }
 
+                vm.guardarTitulo1 = function () {
+                    vm.config.textoTitulo1 = angular.copy(vm.temp.textoTitulo1);
+                    vm.editarTitulo1 = false
+                }
+
+                vm.guardarTitulo2 = function () {
+                    vm.config.textoTitulo2 = angular.copy(vm.temp.textoTitulo2);
+                    vm.editarTitulo2 = false                  
+                }
+
                 vm.eventAPIColorTitulo1 = {
                     onClose: function (api, color, $event) {
                         vm.config.colorTitulo1 = color
