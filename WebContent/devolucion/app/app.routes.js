@@ -1,4 +1,4 @@
-var app = angular.module('myAppRouter', ['ui.router', 'headerDinamicoModule']);
+var app = angular.module('myAppRouter', ['ui.router', 'headerDinamicoModule', 'personalizarSitioModule']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -115,7 +115,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/personalizar-sitio',
             views: {
                 content: {
-                    templateUrl: 'app/components/personalizar-sitio/personalizar-sitio.html'
+                    templateUrl: 'app/components/personalizar-sitio/personalizar-sitio.html',
+                    controller: 'personalizarSitioCtrl as psCtrl'
                 }
                 
             }
