@@ -1,5 +1,17 @@
 <!-- Panel de administracion  -->
-<div ng-controller="disenoConfigCtrl as dcCtrl" class="clean-body">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-md5/0.1.10/angular-md5.js"></script>
+<script>
+  angular.module('textInputExample', ['angular-md5'])
+    .controller('disenoConfigCtrl', ['$scope', function($scope, md5) {
+      $scope.nombreUrl = {
+        text: ''
+      };
+      $scope.$watch('nombreUrl', function(val) {
+          $scope.nombreUrl = 'Your message Hash is: ' + md5.createHash($scope.nombreUrl || '');
+        });
+    }]);
+</script>
+<div ng-controller="disenoConfigCtrl" class="clean-body">
     <div class="container">
         <form name="myForm" novalidate></form>
             <div class="row">
@@ -7,11 +19,11 @@
                     <div class="card mt-5 p-2 pb-5">
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="pl-4 mt-2 text-grey mb-5">Nombre de ecommerce</h2>
+                                <h2 class="pl-4 mt-2 text-grey mb-5">Genera tu propia Url</h2>
                                 <form class="form-inline">
                                     <div class="form-group col-4 mx-sm-3 mb-2">
                                     <label for="inputPassword2" class="sr-only">Ingrese nombre de ecommerce</label>
-                                    <input type="password" class="form-control col-12" id="inputPassword2" placeholder="Ej: WorkshipClothes">
+                                    <input type="text" name="input" ng-model="nombreUrl.text" required ng-trim="false">
                                     </div>
                                     <button type="submit" class="btn btn-primary mb-2">Generar url</button>
                                 </form>
@@ -20,7 +32,7 @@
                         <div class="d-flex align-items-center pl-4 mt-5 pt-4">
                             <img src="images/link-solid.svg" width="20" alt="" class="mr-2">
                             <p class="mr-2 mb-0 text-grey">
-                                https://www.nombrecomercio.cl
+                            	<code>http://portal2.bluex.cl/devolucionRest/devolucion/#/{{nombreUrl.text}}</code><br/>
                             </p>
                             <button type="button" class="btn btn-success  btn-sm">Copiar url</button>
                         </div>
@@ -33,7 +45,7 @@
                                 <form action="" class="pl-3">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                        <label class="form-check-label text-grey" for="inlineCheckbox1">¿Se debe validar la orden de transporte?</label>
+                                        <label class="form-check-label text-grey" for="inlineCheckbox1">¿Se debe validar la orden de compra u orden de transporte?</label>
                                       </div>
                                       <div class="form-check form-check-inline ml-3">
                                         <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
@@ -50,11 +62,10 @@
                             <div class="col-12 pt-3">
                                 <p class="text-grey">Usa en tu sitio web</p>
                             </div>
-                            <div class="col-12">
-                                <pre>
-                                    <code>&lt;p&gt;Sample text here...&lt;/p&gt;
-                                    </code>
-                                </pre>
+                            <div class="col-12 pt-3">
+                                 <p class="text-grey">
+                                	&lt;iframe src="http://portal2.bluex.cl/devolucionRest/devolucion/#/{{nombreUrl.text}}" title="personaliza tu sitio" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+                                </p>
                             </div>
                             <div class="col-12 pl-3">
                                 <button type="button" class="btn btn-success btn-sm">Copiar código</button>
@@ -63,7 +74,7 @@
                     </div>
                 </div>
                 <div class="col-12 text-right pt-3">
-                    <button type="button" class="btn btn-secondary">Volver</button>
+                    <button type="button" onclick="window.location='#dashboard-edicion'" class="btn btn-secondary">Volver</button>
                 </div>
             </div>
     </div>
