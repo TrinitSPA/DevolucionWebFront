@@ -18,7 +18,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="block-grid w-100 header-sitio-edicion" ng-style="psCtrl.style.colorFondo1">
+	<div ng-if="!psCtrl.config.integraloEnTuSitio" class="block-grid w-100 header-sitio-edicion container-fluid"
+		ng-style="psCtrl.style.colorFondo1">
 		<div class="row py-1 align-items-top">
 			<div class="col-4 num12"
 				style="min-width: 320px; max-width: 800px; display: table-cell; vertical-align: top; width: 800px;">
@@ -34,7 +35,7 @@
 						ng-src="{{'data:image/png;base64,' + psCtrl.config.imagen2.base64}}" title="BluexEspress"
 						height="38" width="60" />
 				</a>
-				<div class="card-edicion ml-1">
+				<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-1">
 					<ul class="list-unstyled text-left">
 						<li>
 							<label for="inputImagen2" class="text-grey d-block mb-1">
@@ -45,7 +46,7 @@
 								base-sixty-four-input>
 						</li>
 						<li>
-							<a href="" class="text-grey d-block" ng-click="">
+							<a href="" class="text-grey d-block" ng-click="psCtrl.config.imagen2=''">
 								<img src="images/eliminar.svg" width="23" alt="" class="ml-n1">
 								<span>Eliminar imagen</span>
 							</a>
@@ -53,7 +54,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="col-4 text-right pr-4">
+			<div class="col-4 text-right pr-4" ng-if="!psCtrl.config.ocultarEdicion">
 				<button type="button" class="btn btn-light mt-1" ng-click="psCtrl.showColorFondo1ColorPicker()">
 					<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
 					Cambiar color de fondo
@@ -66,7 +67,7 @@
 	</div>
 
 
-	<section class="hero-msg" ng-style="psCtrl.style.colorFondo2">
+	<section ng-if="!psCtrl.config.integraloEnTuSitio" class="hero-msg" ng-style="psCtrl.style.colorFondo2">
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -76,7 +77,7 @@
 							<div ng-if="!psCtrl.editarTitulo1" class="devolucion-texto d-flex align-items-center">
 								<h2 class="d-inline-block" ng-style="psCtrl.style.titulo1">
 									{{psCtrl.config.textoTitulo1}}</h2>
-								<div class="card-edicion ml-1">
+								<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
 										<li><a href="" class="text-grey d-block mb-1"
 												ng-click="psCtrl.editarTitulo1=true">
@@ -100,7 +101,7 @@
 									</ul>
 								</div>
 							</div>
-							<!-- Texto despue de ehacer click en editar  -->
+							<!-- Texto despues de ehacer click en editar  -->
 							<div ng-hide="!psCtrl.editarTitulo1" class="devolucion-texto-editar">
 								<form class="w-50">
 									<div class="form-group mb-1">
@@ -120,7 +121,7 @@
 							</div>
 						</div>
 						<div class="col-3 text-right">
-							<div class="card-edicion ml-1">
+							<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-1">
 								<ul class="list-unstyled text-left">
 									<li>
 										<label style="cursor: pointer;" class="text-grey d-block mb-1"
@@ -156,7 +157,7 @@
 								<h6 class="d-inline-block vertical-align-middle" ng-style="psCtrl.style.titulo2">
 									{{psCtrl.config.textoTitulo2}}
 								</h6>
-								<div class="card-edicion ml-1">
+								<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
 										<li><a href="" class="text-grey d-block mb-1"
 												ng-click="psCtrl.editarTitulo2=true">
@@ -197,7 +198,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-2">
+						<div class="col-2" ng-if="!psCtrl.config.ocultarEdicion">
 							<button type="button" class="btn btn-light mt-2"
 								ng-click="psCtrl.showColorFondo2ColorPicker()">
 								<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
@@ -224,7 +225,8 @@
 							<div ng-style="psCtrl.style.colorPasoCirculo" class="circulo"></div>
 							<div class="linea"></div>
 						</div>
-						<button type="button" class="btn btn-light mt-n3" ng-click="psCtrl.showColorPasoColorPicker()">
+						<button ng-if="!psCtrl.config.ocultarEdicion" type="button" class="btn btn-light mt-n3"
+							ng-click="psCtrl.showColorPasoColorPicker()">
 							<img src="images/cambiar-color.svg" width="16" alt="" class="mt-n1">
 							Cambiar color paso 1
 						</button>
@@ -233,7 +235,7 @@
 						</color-picker>
 					</div>
 					<div class="col-4 px-0">
-						<div class="paso paso-tres align-items-end ">
+						<div class="paso paso-tres align-items-end">
 							<h6>PASO 2</h6>
 							<div class="circulo"></div>
 							<div class="linea"></div>
@@ -246,7 +248,7 @@
 					<!-- Texto sin editar  -->
 					<div ng-if="!psCtrl.editarTitulo3" class="edicion-texto col-12 col-md-10 pl-0 mt-n4">
 						<h5 class="d-flex align-items-center">{{psCtrl.config.textoTitulo3}}
-							<div class="card-edicion ml-1">
+							<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-1">
 								<ul class="list-unstyled text-left">
 									<li><a href="" class="text-grey d-block mb-1" ng-click="psCtrl.editarTitulo3=true">
 											<img src="images/editar-texto.svg" width="20" alt="">
@@ -255,18 +257,19 @@
 									</li>
 								</ul>
 							</div>
-							<div class="card-edicion ml-auto col-2" style="min-width: 210px;
+							<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-auto col-2" style="min-width: 210px;
 							padding: 10px;">
 								<ul class="list-unstyled text-left">
 									<li>
-										<a href="" class="text-grey d-block" ng-click="psCtrl.showColorFondo3ColorPicker()">
+										<a href="" class="text-grey d-block"
+											ng-click="psCtrl.showColorFondo3ColorPicker()">
 											<img src="images/cambiar-color.svg" width="16" alt="" class="">
 											<span class="ml-1">Cambiar color de fondo</span>
 										</a>
 										<color-picker api="psCtrl.colorFondo3ColorPicker"
-												ng-model="psCtrl.config.colorFondo3"
-												event-api="psCtrl.eventAPIColorColorFondo3"
-												options="psCtrl.colorPickerOptionsColorFondo3"></color-picker>
+											ng-model="psCtrl.config.colorFondo3"
+											event-api="psCtrl.eventAPIColorColorFondo3"
+											options="psCtrl.colorPickerOptionsColorFondo3"></color-picker>
 									</li>
 								</ul>
 							</div>
@@ -324,12 +327,14 @@
 							<p>*Campos obligatorios</p>
 						</div>
 						<div class="col-12 col-md-12">
-							<button type="button" class="btn btn-primary btn-lg btn-block btn-validar colorBoton" ng-style="psCtrl.style.colorBoton">
+							<button type="button" class="btn btn-primary btn-lg btn-block btn-validar colorBoton"
+								ng-style="psCtrl.style.colorBoton">
 								Validar
-								<div class="card-edicion">
+								<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion">
 									<ul class="list-unstyled text-left">
 										<li>
-											<a href="" class="text-grey d-block" ng-click="psCtrl.showColorBotonColorPicker()">
+											<a href="" class="text-grey d-block"
+												ng-click="psCtrl.showColorBotonColorPicker()">
 												<img src="images/cambiar-color.svg" width="16" alt="" class="">
 												<span class="ml-1">Cambiar color</span>
 											</a>
@@ -359,12 +364,14 @@
 		<div class="col-6 pt-1 pl-4">
 			<form action="">
 				<div class="custom-control custom-switch custom-switch-lg custom-control-inline">
-					<input type="checkbox" class="custom-control-input" id="integralo-en-tu-sitio">
+					<input ng-disabled="psCtrl.bloquearChecks()" type="checkbox" class="custom-control-input" id="integralo-en-tu-sitio"
+						ng-model="psCtrl.config.integraloEnTuSitio">
 					<label class="custom-control-label text-white" for="integralo-en-tu-sitio">Integralo en tu
 						sitio</label>
 				</div>
 				<div class="custom-control custom-switch custom-control-inline">
-					<input type="checkbox" class="custom-control-input" id="ocultar-edicion">
+					<input ng-disabled="psCtrl.bloquearChecks()" type="checkbox" class="custom-control-input" id="ocultar-edicion"
+						ng-model="psCtrl.config.ocultarEdicion">
 					<label class="custom-control-label text-white" for="ocultar-edicion">Ocultar edición</label>
 				</div>
 			</form>
@@ -372,7 +379,8 @@
 		<div class="col-6 text-right">
 			<button type="button" class="btn btn-secondary mr-2" data-toggle="modal"
 				data-target="#exampleModal">Volver</button>
-			<button ng-if="!psCtrl.loadingGuardar" type="button" class="btn btn-success" ng-click="psCtrl.guardar()">Guardar cambios</button>
+			<button ng-if="!psCtrl.loadingGuardar" type="button" class="btn btn-success"
+				ng-click="psCtrl.guardar()">Guardar cambios</button>
 			<button ng-if="psCtrl.loadingGuardar" type="button" class="btn btn-success">
 				<div class="spinner-button">
 					<div class="bounce1"></div>

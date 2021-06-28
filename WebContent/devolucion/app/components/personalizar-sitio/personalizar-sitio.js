@@ -10,6 +10,7 @@ angular.module('personalizarSitioModule')
                 const host = $location.protocol() + '://' + $location.host() + ':' + $location.port();
 
                 vm.editarTitulo1, vm.editarTitulo2, vm.editarTitulo3 = false;
+                vm.colorEnEdicion = false;
                 vm.loadingGuardar = false;
 
                 vm.colorPickerOptions1 = generateColorOption('colorPickerTitulo1');
@@ -21,6 +22,8 @@ angular.module('personalizarSitioModule')
                 vm.colorPickerOptionsColorBoton = generateColorOption('colorPickerColorBoton');
 
                 vm.config = {
+                    ocultarEdicion: false,
+                    integraloEnTuSitio: false,
                     textoTitulo1: "Devolución Web",
                     colorTitulo1: "858796",
                     textoTitulo2: "¿Necesitas realizar una devolución? Completa el siguiente formulario:",
@@ -94,6 +97,7 @@ angular.module('personalizarSitioModule')
                         vm.config.colorTitulo1 = color
                         vm.style.titulo1.color = "#" + color
                         vm.titulo1ColorPicker.getElement()[0].style.display = "none"
+                        vm.colorEnEdicion = false;
                     }
                 }
 
@@ -102,6 +106,7 @@ angular.module('personalizarSitioModule')
                         vm.config.colorTitulo2 = color
                         vm.style.titulo2.color = "#" + color
                         vm.titulo2ColorPicker.getElement()[0].style.display = "none"
+                        vm.colorEnEdicion = false;
                     }
                 }
 
@@ -110,6 +115,7 @@ angular.module('personalizarSitioModule')
                         vm.config.colorFondo1 = color
                         vm.style.colorFondo1["background-color"] = "#" + color
                         vm.colorFondo1ColorPicker.getElement()[0].style.display = "none"
+                        vm.colorEnEdicion = false;
                     }
                 }
 
@@ -118,6 +124,7 @@ angular.module('personalizarSitioModule')
                         vm.config.colorFondo2 = color
                         vm.style.colorFondo2.background = "#" + color
                         vm.colorFondo2ColorPicker.getElement()[0].style.display = "none"
+                        vm.colorEnEdicion = false;
                     }
                 }
 
@@ -126,6 +133,7 @@ angular.module('personalizarSitioModule')
                         vm.config.colorFondo3 = color
                         vm.style.colorFondo3.background = "#" + color
                         vm.colorFondo3ColorPicker.getElement()[0].style.display = "none"
+                        vm.colorEnEdicion = false;
                     }
                 }
 
@@ -136,6 +144,7 @@ angular.module('personalizarSitioModule')
                         vm.style.colorPasoCirculo.background = "#" + color
                         vm.style.colorPasoCirculo["border-color"] = "#" + color
                         vm.colorPasoColorPicker.getElement()[0].style.display = "none"
+                        vm.colorEnEdicion = false;
                     }
                 }
 
@@ -145,42 +154,50 @@ angular.module('personalizarSitioModule')
                         vm.style.colorBoton["background-color"] = "#" + color
                         vm.style.colorBoton["border-color"] = "#" + color
                         vm.colorBotonColorPicker.getElement()[0].style.display = "none"
+                        vm.colorEnEdicion = false;
                     }
                 }
 
                 vm.showTitulo1ColorPicker = function () {
                     vm.titulo1ColorPicker.getElement()[0].style.display = 'inline';
                     vm.titulo1ColorPicker.open()
+                    vm.colorEnEdicion = true;
                 }
 
                 vm.showTitulo2ColorPicker = function () {
                     vm.titulo2ColorPicker.getElement()[0].style.display = 'inline';
                     vm.titulo2ColorPicker.open()
+                    vm.colorEnEdicion = true;
                 }
 
                 vm.showColorFondo1ColorPicker = function () {
                     vm.colorFondo1ColorPicker.getElement()[0].style.display = 'inline';
                     vm.colorFondo1ColorPicker.open()
+                    vm.colorEnEdicion = true;
                 }
 
                 vm.showColorFondo2ColorPicker = function () {
                     vm.colorFondo2ColorPicker.getElement()[0].style.display = 'inline';
                     vm.colorFondo2ColorPicker.open()
+                    vm.colorEnEdicion = true;
                 }
 
                 vm.showColorFondo3ColorPicker = function () {
                     vm.colorFondo3ColorPicker.getElement()[0].style.display = 'inline';
                     vm.colorFondo3ColorPicker.open()
+                    vm.colorEnEdicion = true;
                 }
 
                 vm.showColorPasoColorPicker = function () {
                     vm.colorPasoColorPicker.getElement()[0].style.display = 'inline';
                     vm.colorPasoColorPicker.open()
+                    vm.colorEnEdicion = true;
                 }
 
                 vm.showColorBotonColorPicker = function () {
                     vm.colorBotonColorPicker.getElement()[0].style.display = 'inline';
                     vm.colorBotonColorPicker.open()
+                    vm.colorEnEdicion = true;
                 }
 
                 vm.guardar = function () {
@@ -194,6 +211,10 @@ angular.module('personalizarSitioModule')
                             console.log('Error:' + data);
                             vm.loadingGuardar = false;
                         });
+                }
+
+                vm.bloquearChecks = function () {
+                    return vm.editarTitulo1 || vm.editarTitulo2 || vm.editarTitulo3 || vm.colorEnEdicion;
                 }
             }]);
 
