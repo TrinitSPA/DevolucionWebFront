@@ -36,11 +36,12 @@
 						height="38" width="60" />
 				</a>
 				<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-1">
+				<form action="">
 					<ul class="list-unstyled text-left">
 						<li>
 							<label for="inputImagen2" class="text-grey d-block mb-1">
 								<img src="images/subir.svg" width="20" alt="">
-								<span>Subir imagen</span>
+								<span>Subir imagen</span><span class="f-tooltip float-right ">i</span>
 							</label>
 							<input id="inputImagen2" style="display:none" type='file' ng-model='psCtrl.config.imagen2'
 								base-sixty-four-input>
@@ -52,6 +53,7 @@
 							</a>
 						</li>
 					</ul>
+				</form>
 				</div>
 			</div>
 			<div class="col-4 text-right pr-4" ng-if="!psCtrl.config.ocultarEdicion">
@@ -300,7 +302,7 @@
 									<label for="ordenCompra" class="col-4 justify-content-start">Número de Orden de
 										Compra* <span class="f-tooltip float-right ">i</span> </label>
 									<input type="text" class="form-control col-6 justify-content-start"
-										name="ordenCompra" required ng-model="inCtrl.formData.ordenCompra"
+										name="ordenCompra" required ng-model="psCtrl.temp.ordenCompra"
 										placeholder="Ej: AC00112233">
 								</div>
 							</div>
@@ -309,7 +311,7 @@
 									<label for="tipoProducto" class="col-4 justify-content-start">Tipo de
 										Producto*</label>
 									<input type="text" class="form-control col-6 justify-content-start"
-										id="tipoProducto" ng-model="inCtrl.formData.tipoProducto" required
+										id="tipoProducto" ng-model="psCtrl.temp.tipoProducto" required
 										placeholder="Ej: Ropa, Electrodomesticos, etc">
 								</div>
 							</div>
@@ -318,8 +320,8 @@
 							<div class="form-group">
 								<label for="codigoMotivo" class="col-4 justify-content-start">Motivo*</label>
 								<select id="codigoMotivo" class="form-control col-6 justify-content-start" required
-									ng-init="inCtrl.cargarMotivos()" ng-model="inCtrl.formData.codigoMotivo"
-									ng-options="option.nombreMotivo for option in inCtrl.formData.motivos track by option.codigoMotivo">
+									ng-init="psCtrl.cargarMotivos()" ng-model="psCtrl.temp.codigoMotivo"
+									ng-options="option.nombreMotivo for option in psCtrl.temp.motivos track by option.codigoMotivo">
 								</select>
 							</div>
 						</div>
@@ -377,6 +379,7 @@
 			</form>
 		</div>
 		<div class="col-6 text-right">
+			<button type="button" class="btn btn-secondary" onclick="javascript:location.reload();">Limpiar</button>
 			<button type="button" class="btn btn-secondary mr-2" data-toggle="modal"
 				data-target="#exampleModal">Volver</button>
 			<button ng-if="!psCtrl.loadingGuardar" type="button" class="btn btn-success"

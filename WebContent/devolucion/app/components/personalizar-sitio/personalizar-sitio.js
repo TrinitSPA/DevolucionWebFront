@@ -7,6 +7,8 @@ angular.module('personalizarSitioModule')
             '$location',
             function ($scope, $http, $state, loginService, $location) {
                 var vm = this;
+                vm.formData = {
+            	};
                 const host = $location.protocol() + '://' + $location.host() + ':' + $location.port();
 
                 vm.editarTitulo1, vm.editarTitulo2, vm.editarTitulo3 = false;
@@ -40,6 +42,9 @@ angular.module('personalizarSitioModule')
                     textoTitulo3: "DATOS DEL PRODUCTO",
                     colorFondo3: "f4f4f4",
                     colorBoton: "0033a0",
+                    ordenCompra: "",
+                    tipoProducto: "",
+                    codigoMotivo: "",
                 }
 
                 vm.style = {
@@ -74,7 +79,10 @@ angular.module('personalizarSitioModule')
                 vm.temp = {
                     textoTitulo1: vm.config.textoTitulo1,
                     textoTitulo2: vm.config.textoTitulo2,
-                    textoTitulo3: vm.config.textoTitulo3
+                    textoTitulo3: vm.config.textoTitulo3,
+                    ordenCompra: vm.config.ordenCompra,
+                    tipoProducto: vm.config.tipoProducto,
+                    codigoMotivo: vm.config.codigoMotivo
                 }
 
                 vm.guardarTitulo1 = function () {
@@ -202,7 +210,19 @@ angular.module('personalizarSitioModule')
 
                 vm.guardar = function () {
                     vm.loadingGuardar = true;
-                    $http.post(host + '/devolucionRest/rest/logistica/personalizar/', vm.config)
+                    const data = angular.copy(vm.config);
+                    data.headerLogo = data.imagen1.base64;
+                    data.headerIcono = data.imagen2.base64;
+                    data.backgroundColor = data.colorFondo1;
+                    data.title = data.textoTitulo1;
+                    data.subtitle = data.textoTitulo2;
+                    data.headerColourBottom = data.colorFondo2;
+                    data.headerColourText = data.colorTitulo2;
+                    data.entryProduct = data.textoTitulo3;
+                    data.entryColour = data.colorFondo3;
+                    data.entryValidateButton = data.colorBoton;
+                    
+                    $http.post(host + '/devolucionRest/rest/logistica/personalizarSitio/crear/', data)
                         .success(function (data) {
                             console.log(data)
                             vm.loadingGuardar = false;
