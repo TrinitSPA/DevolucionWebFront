@@ -8,7 +8,7 @@ angular.module('personalizarSitioModule')
             function ($scope, $http, $state, loginService, $location) {
                 var vm = this;
                 vm.formData = {
-            	};
+                };
                 const host = $location.protocol() + '://' + $location.host() + ':8687';
 
                 vm.editarTitulo1, vm.editarTitulo2, vm.editarTitulo3 = false;
@@ -27,7 +27,7 @@ angular.module('personalizarSitioModule')
                     ocultarEdicion: false,
                     integraloEnTuSitio: false,
                     textoTitulo1: "Devolución Web",
-                    colorTitulo1: "858796",
+                    colorTitulo1: "858196",
                     textoTitulo2: "¿Necesitas realizar una devolución? Completa el siguiente formulario:",
                     colorTitulo2: "39c0e0",
                     colorFondo1: "134085",
@@ -83,6 +83,72 @@ angular.module('personalizarSitioModule')
                     ordenCompra: vm.config.ordenCompra,
                     tipoProducto: vm.config.tipoProducto,
                     codigoMotivo: vm.config.codigoMotivo
+                }
+
+                vm.init = function () {
+                    vm.cargarPerfil();
+                }
+
+                vm.cargarPerfil = function () {
+                    $http.get('http://localhost:8687/devolucionRest/rest/logistica/configuracion/ecommerce/f9bfa23461a398a8f9687b4a70267e8d')
+                        .success(function (data) {
+                            console.log(data[0].frontEnd)
+
+                            // temporal
+                            vm.config.imagen1.base64 = data.headerLogo;
+                            vm.config.imagen2.base64 = data.headerIcono;
+                            vm.config.colorFondo1 = data.backgroundColor;
+                            vm.config.textoTitulo1 = data.title;
+                            vm.config.textoTitulo2 = data.subtitle;
+                            vm.config.colorFondo2 = data.headerColourBottom;
+                            vm.config.colorTitulo2 = data.headerColourText;
+                            vm.config.textoTitulo3 = data.entryProduct;
+                            vm.config.colorFondo3 = data.entryColour;
+                            vm.config.colorBoton = data.entryValidateButton;
+
+                            vm.style = {
+                                titulo1: {
+                                    color: "#" + vm.config.colorTitulo1
+                                },
+                                titulo2: {
+                                    color: "#" + vm.config.colorTitulo2
+                                },
+                                colorFondo1: {
+                                    "background-color": "#" + vm.config.colorFondo1
+                                },
+                                colorFondo2: {
+                                    background: "#" + vm.config.colorFondo2
+                                },
+                                colorFondo3: {
+                                    background: "#" + vm.config.colorFondo3
+                                },
+                                colorPasoTexto: {
+                                    color: "#" + vm.config.colorPaso
+                                },
+                                colorPasoCirculo: {
+                                    background: "#" + vm.config.colorPaso,
+                                    "border-color": "#" + vm.config.colorPaso
+                                },
+                                colorBoton: {
+                                    "background-color": "#" + vm.config.colorBoton,
+                                    "border-color": "#" + vm.config.colorBoton
+                                }
+                            }
+            
+                            vm.temp = {
+                                textoTitulo1: vm.config.textoTitulo1,
+                                textoTitulo2: vm.config.textoTitulo2,
+                                textoTitulo3: vm.config.textoTitulo3,
+                                ordenCompra: vm.config.ordenCompra,
+                                tipoProducto: vm.config.tipoProducto,
+                                codigoMotivo: vm.config.codigoMotivo
+                            }
+
+                            // fin temporal
+                        })
+                        .error(function (data) {
+                            console.log('Error:' + data);
+                        });
                 }
 
                 vm.guardarTitulo1 = function () {
@@ -221,7 +287,7 @@ angular.module('personalizarSitioModule')
                     data.entryProduct = data.textoTitulo3;
                     data.entryColour = data.colorFondo3;
                     data.entryValidateButton = data.colorBoton;
-                    
+
                     $http.post(host + '/devolucionRest/rest/logistica/personalizarSitio/crear/', data)
                         .success(function (data) {
                             console.log(data)
@@ -236,9 +302,9 @@ angular.module('personalizarSitioModule')
                 vm.bloquearChecks = function () {
                     return vm.editarTitulo1 || vm.editarTitulo2 || vm.editarTitulo3 || vm.colorEnEdicion;
                 }
-                $(document).ready(function() {
+                $(document).ready(function () {
                     $('[data-toggle=tooltip]').tooltip();
-                }); 
+                });
             }]);
 
 const generateColorOption = function (id) {
