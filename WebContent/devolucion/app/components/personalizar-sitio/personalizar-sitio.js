@@ -9,7 +9,7 @@ angular.module('personalizarSitioModule')
                 var vm = this;
                 vm.formData = {
             	};
-                const host = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+                const host = $location.protocol() + '://' + $location.host() + ':8687';
 
                 vm.editarTitulo1, vm.editarTitulo2, vm.editarTitulo3 = false;
                 vm.colorEnEdicion = false;

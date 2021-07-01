@@ -41,7 +41,11 @@
 						<li>
 							<label for="inputImagen2" class="text-grey d-block mb-1">
 								<img src="images/subir.svg" width="20" alt="">
-								<span>Subir imagen</span><span class="f-tooltip float-right ">i</span>
+								<a href="" class="text-grey">Subir imagen</a>
+								<button type="button" class="btn btn-secondary btn-tooltip" 
+											data-toggle="tooltip" data-placement="left" title="Tamaño de la imagen width:200px height:80px">
+											i 
+											</button>
 							</label>
 							<input id="inputImagen2" style="display:none" type='file' ng-model='psCtrl.config.imagen2'
 								base-sixty-four-input>
@@ -129,9 +133,9 @@
 										<label style="cursor: pointer;" class="text-grey d-block mb-1"
 											for="inputImagen1">
 											<img src="images/subir.svg" width="20" alt="">
-											<span>Subir imagen</span>
+											<a href="" class="text-grey">Subir imagen</a>
 											<button type="button" class="btn btn-secondary btn-tooltip" 
-											data-toggle="tooltip" data-placement="left" title="Tooltip on left">
+											data-toggle="tooltip" data-placement="left" title="Tamaño del icono  width:200px height:80px">
 											i 
 											</button>
 										</label>
@@ -323,9 +327,10 @@
 						<div class="col-12">
 							<div class="form-group">
 								<label for="codigoMotivo" class="col-4 justify-content-start">Motivo*</label>
-								<select id="codigoMotivo" class="form-control col-6 justify-content-start" required
-									ng-init="psCtrl.cargarMotivos()" ng-model="psCtrl.temp.codigoMotivo"
-									ng-options="option.nombreMotivo for option in psCtrl.temp.motivos track by option.codigoMotivo">
+								<select id="codigoMotivo" class="form-control col-6 justify-content-start">
+									<option value="1">Cambio de Talla</option>
+									<option>Satisfacción del Producto</option>
+									<option>Fallas en el Producto</option>
 								</select>
 							</div>
 						</div>
