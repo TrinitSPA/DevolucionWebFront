@@ -95,16 +95,16 @@ angular.module('personalizarSitioModule')
                             console.log(data[0].frontEnd)
 
                             // temporal
-                            vm.config.imagen1.base64 = data.headerLogo;
-                            vm.config.imagen2.base64 = data.headerIcono;
-                            vm.config.colorFondo1 = data.backgroundColor;
-                            vm.config.textoTitulo1 = data.title;
-                            vm.config.textoTitulo2 = data.subtitle;
-                            vm.config.colorFondo2 = data.headerColourBottom;
-                            vm.config.colorTitulo2 = data.headerColourText;
-                            vm.config.textoTitulo3 = data.entryProduct;
-                            vm.config.colorFondo3 = data.entryColour;
-                            vm.config.colorBoton = data.entryValidateButton;
+                            vm.config.imagen1.base64 = data[0].frontEnd.headerLogo;
+                            vm.config.imagen2.base64 = data[0].frontEnd.headerIcono;
+                            vm.config.colorFondo1 = data[0].frontEnd.backgroundColor;
+                            vm.config.textoTitulo1 = data[0].frontEnd.title;
+                            vm.config.textoTitulo2 = data[0].frontEnd.subtitle;
+                            vm.config.colorFondo2 = data[0].frontEnd.headerColourBottom;
+                            vm.config.colorTitulo2 = data[0].frontEnd.headerColourText;
+                            vm.config.textoTitulo3 = data[0].frontEnd.entryProduct;
+                            vm.config.colorFondo3 = data[0].frontEnd.entryColour;
+                            vm.config.colorBoton = data[0].frontEnd.entryValidateButton;
 
                             vm.style = {
                                 titulo1: {
@@ -143,7 +143,7 @@ angular.module('personalizarSitioModule')
                                 tipoProducto: vm.config.tipoProducto,
                                 codigoMotivo: vm.config.codigoMotivo
                             }
-
+                            console.log(vm.config)
                             // fin temporal
                         })
                         .error(function (data) {
