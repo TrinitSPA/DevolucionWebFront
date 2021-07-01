@@ -236,6 +236,9 @@ angular.module('personalizarSitioModule')
                 vm.bloquearChecks = function () {
                     return vm.editarTitulo1 || vm.editarTitulo2 || vm.editarTitulo3 || vm.colorEnEdicion;
                 }
+                $(document).ready(function() {
+                    $('[data-toggle=tooltip]').tooltip();
+                }); 
             }]);
 
 const generateColorOption = function (id) {

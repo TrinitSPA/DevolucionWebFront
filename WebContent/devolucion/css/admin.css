@@ -493,3 +493,33 @@ datepicker{
   .color-picker-wrapper .color-picker-panel{
     box-shadow: 0 0 6px rgb(0 0 0 / 50%)!important;
 }
+
+.btn-tooltip{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #858585;
+    font-size: 13px;
+    text-align: center;
+    position: relative;
+    padding: 0!important;
+    opacity: 1!important;
+}
+
+.tooltip.show {
+    opacity:1;
+} 
+.tooltip-inner {
+    background-color:#e2e0e0;
+    padding: 16px;
+    color: #706f6f;
+    border-radius: 8px;
+    opacity: 1!important;
+}
+
+.tooltip.bs-tooltip-auto[x-placement^=left] .arrow::before, .tooltip.bs-tooltip-left .arrow::before,
+.tooltip.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .tooltip.bs-tooltip-bottom .arrow::before, 
+.tooltip.bs-tooltip-auto[x-placement^=right] .arrow::before, .tooltip.bs-tooltip-right .arrow::before ,
+.tooltip.bs-tooltip-auto[x-placement^=top] .arrow::before, .tooltip.bs-tooltip-top .arrow::before {
+    border-left-color: #e2e0e0;
+}
