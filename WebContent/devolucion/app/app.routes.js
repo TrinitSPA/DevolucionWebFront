@@ -125,8 +125,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             url: '/reportes',
             views: {
                 header: {
-                    templateUrl: 'app/components/header/header.html',
-                    controller: 'headerDinamicoCtrl as hdCtrl'                    
+                    templateUrl: 'app/components/header/header.html'
                 },
                 content: {
                     templateUrl: 'app/components/reportes/reportes.html'

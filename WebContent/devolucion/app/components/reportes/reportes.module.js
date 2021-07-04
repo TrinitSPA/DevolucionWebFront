@@ -1,0 +1,1 @@
+angular.module('reportesModule', ["chart.js"]);

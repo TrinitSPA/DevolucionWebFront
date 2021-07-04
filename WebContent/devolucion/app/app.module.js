@@ -7,5 +7,6 @@ var app = angular.module("myApp", [
     'ingresoModule',
     'loginModule',
     'productosModule',
-    'personalizarSitioModule'
+    'personalizarSitioModule',
+    'reportesModule'
 ]);
