@@ -14,66 +14,75 @@ angular.module('reportesModule')
 
             vm.cargarReportes = function (data) {
 
-                vm.seriesResumen = ['Aprobados', 'Rechazados', 'Pendientes'];
+                vm.seriesResumen = vm.getSeries(data);
 
                 vm.labelsResumen = data.map((item) => {
                     return vm.getMonth(item.mes - 1)
                 });
 
-                vm.optionsResumen = { legend: { display: true } };
-                vm.dataResumen = [
-                    data.map((item) => {
-                        return item.cantidadAprobado
-                    }),
-                    data.map((item) => {
-                        return item.cantidadRechazado
-                    }),
-                    data.map((item) => {
-                        return item.cantidadPendiente
-                    }),
-                ];
+                console.log(vm.seriesResumen)
 
+                vm.optionsResumen = { legend: { display: true } };
+                vm.dataResumen = [];
+                vm.seriesResumen.forEach(serie => {
+                    vm.dataResumen.push(
+                        data.map((item) => {
+                            for (let index = 0; index < item.reporteEstadosTOs.length; index++) {
+                                if (item.reporteEstadosTOs[index].estado === serie) {
+                                    return item.reporteEstadosTOs[index].cantidad
+                                }
+                            }
+                            return 0;
+                        }));
+                });
+                console.log(vm.seriesResumen)
+                console.log(vm.dataResumen)
                 vm.loading = false;
                 $scope.$apply();
             }
 
+            vm.getSeries = function (data) {
+                const arraysEstados = data.map((item) => {
+                    return item.reporteEstadosTOs.map((reporteEstado) => {
+                        return reporteEstado.estado
+                    })
+                });
+                let arrayConcatenados = []
+                for (var i = 0; i < arraysEstados.length; ++i) {
+                    arrayConcatenados = arrayConcatenados.concat(arraysEstados[i])
+                }
+                return arrayConcatenados.filter((item, pos) => arrayConcatenados.indexOf(item) === pos)
+            }
+
             vm.dataTest = [
-            {
-                    "cantidadPendiente": 25,
-                    "cantidadAprobado": 45,
-                    "cantidadRechazado": 37,
-                    "mes": 1
+                {
+                    "annio": 2020,
+                    "mes": 11,
+                    "reporteEstadosTOs": [
+                        {
+                            "estado": "Pendiente",
+                            "cantidad": 10
+                        }
+                    ]
                 },
                 {
-                    "cantidadPendiente": 34,
-                    "cantidadAprobado": 54,
-                    "cantidadRechazado": 87,
-                    "mes": 2
-                },
-                {
-                    "cantidadPendiente": 12,
-                    "cantidadAprobado": 32,
-                    "cantidadRechazado": 43,
-                    "mes": 3
-                },
-                {
-                    "cantidadPendiente": 25,
-                    "cantidadAprobado": 45,
-                    "cantidadRechazado": 37,
-                    "mes": 4
-                },
-                {
-                    "cantidadPendiente": 34,
-                    "cantidadAprobado": 54,
-                    "cantidadRechazado": 87,
-                    "mes": 5
-                },
-                {
-                    "cantidadPendiente": 12,
-                    "cantidadAprobado": 32,
-                    "cantidadRechazado": 43,
-                    "mes": 6
-                },
+                    "annio": 2020,
+                    "mes": 10,
+                    "reporteEstadosTOs": [
+                        {
+                            "estado": "Pendiente",
+                            "cantidad": 25
+                        },
+                        {
+                            "estado": "Rechazado",
+                            "cantidad": 16
+                        },
+                        {
+                            "estado": "Aprobada",
+                            "cantidad": 7
+                        }
+                    ]
+                }
             ]
 
             vm.getMonth = function (monthNumber) {
