@@ -1,15 +1,16 @@
 <!-- Panel de administracion  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-md5/0.1.10/angular-md5.js"></script>
+
+
 <script>
-  angular.module('textInputExample', ['angular-md5'])
-    .controller('disenoConfigCtrl', ['$scope', function($scope, md5) {
-      $scope.nombreUrl = {
-        text: ''
-      };
-      $scope.$watch('nombreUrl', function(val) {
-          $scope.nombreUrl = 'Your message Hash is: ' + md5.createHash($scope.nombreUrl || '');
-        });
-    }]);
+function myFunction() {
+    var x = document.getElementById("link");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
 </script>
 <div ng-controller="disenoConfigCtrl" class="clean-body">
     <div class="container">
@@ -23,19 +24,22 @@
                                 <form class="form-inline">
                                     <div class="form-group col-4 mx-sm-3 mb-2">
                                     <label for="inputPassword2" class="sr-only">Ingrese nombre de ecommerce</label>
-                                    <input type="text" name="input" ng-model="nombreUrl.text" required ng-trim="false">
+                                    <input type="text" name="input" value="80855-5" required ng-trim="false">&nbsp;
+                                    <button type="submit" class="btn btn-primary mb-2" onclick="myFunction()">Generar url</button>
                                     </div>
-                                    <button type="submit" class="btn btn-primary mb-2">Generar url</button>
                                 </form>
                             </div>
                         </div>
-                        <div class="d-flex align-items-center pl-4 mt-5 pt-4">
+                        <div  id="link" style="display: none;" >
+                         <div class="d-flex align-items-center pl-4 mt-5 pt-4">
                             <img src="images/link-solid.svg" width="20" alt="" class="mr-2">
                             <p class="mr-2 mb-0 text-grey">
                             	<code>http://portal2.bluex.cl/devolucionRest/devolucion/#/{{nombreUrl.text}}</code><br/>
                             </p>
-                            <button type="button" class="btn btn-success  btn-sm">Copiar url</button>
+                            <button type="button" class="btn btn-success  btn-sm">Copiar url1</button>
                         </div>
+                        </div>
+                       
                     </div>
                 </div>
                 <div class="col-12 mt-5">

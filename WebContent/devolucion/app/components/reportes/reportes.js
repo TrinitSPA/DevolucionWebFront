@@ -38,6 +38,24 @@ angular.module('reportesModule')
             }
 
             vm.dataTest = [
+            {
+                    "cantidadPendiente": 25,
+                    "cantidadAprobado": 45,
+                    "cantidadRechazado": 37,
+                    "mes": 1
+                },
+                {
+                    "cantidadPendiente": 34,
+                    "cantidadAprobado": 54,
+                    "cantidadRechazado": 87,
+                    "mes": 2
+                },
+                {
+                    "cantidadPendiente": 12,
+                    "cantidadAprobado": 32,
+                    "cantidadRechazado": 43,
+                    "mes": 3
+                },
                 {
                     "cantidadPendiente": 25,
                     "cantidadAprobado": 45,

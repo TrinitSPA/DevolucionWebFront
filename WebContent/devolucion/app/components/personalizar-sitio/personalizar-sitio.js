@@ -9,7 +9,7 @@ angular.module('personalizarSitioModule')
                 var vm = this;
                 vm.formData = {
                 };
-                const host = $location.protocol() + '://' + $location.host() + ':8687';
+                const host = $location.protocol() + '://' + $location.host() + ':8081';
 
                 vm.editarTitulo1, vm.editarTitulo2, vm.editarTitulo3 = false;
                 vm.colorEnEdicion = false;
@@ -90,7 +90,7 @@ angular.module('personalizarSitioModule')
                 }
 
                 vm.cargarPerfil = function () {
-                    $http.get('http://localhost:8687/devolucionRest/rest/logistica/configuracion/ecommerce/f9bfa23461a398a8f9687b4a70267e8d')
+                    $http.get(host + '/devolucionRest/rest/logistica/configuracion/ecommerce/f9bfa23461a398a8f9687b4a70267e8d')
                         .success(function (data) {
                             console.log(data[0].frontEnd)
 
@@ -277,6 +277,9 @@ angular.module('personalizarSitioModule')
                 vm.guardar = function () {
                     vm.loadingGuardar = true;
                     const data = angular.copy(vm.config);
+                    data.codigo = 28;
+                    data.clienteCodigo = 2;
+                    data.estado = 1;
                     data.headerLogo = data.imagen1.base64;
                     data.headerIcono = data.imagen2.base64;
                     data.backgroundColor = data.colorFondo1;
@@ -288,10 +291,11 @@ angular.module('personalizarSitioModule')
                     data.entryColour = data.colorFondo3;
                     data.entryValidateButton = data.colorBoton;
 
-                    $http.post(host + '/devolucionRest/rest/logistica/personalizarSitio/crear/', data)
+                    $http.put(host + '/devolucionRest/rest/logistica/personalizarSitio/actualizar/', data)
                         .success(function (data) {
                             console.log(data)
                             vm.loadingGuardar = false;
+                            vm.cargarPerfil();
                         })
                         .error(function (data) {
                             console.log('Error:' + data);
