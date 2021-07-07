@@ -3,16 +3,30 @@ angular.module('reportesModule')
         ['$scope', '$http', '$state', '$location', function ($scope, $http, $state, $location) {
             var vm = this;
             var host = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+            vm.checkFechas = "6meses"
+
+            vm.mesInicio = "10"
+            vm.annoInicio = "2020"
+            vm.mesFin = "11"
+            vm.annoFin = "2020"
 
             vm.loading = true;
 
             vm.init = function () {
                 setTimeout(() => {
-                    vm.cargarReportes(vm.dataTest);
+                    vm.procesarReportes(vm.dataTest);
                 }, 2000);
             }
 
-            vm.cargarReportes = function (data) {
+            vm.check6Meses = function () {
+
+            }
+
+            vm.buscarReportes = function () {
+
+            }
+
+            vm.procesarReportes = function (data) {
 
                 vm.seriesResumen = vm.getSeries(data);
 
