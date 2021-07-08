@@ -11,6 +11,8 @@ angular.module('reportesModule')
             vm.annoFin = "2020"
 
             vm.loading = true;
+            vm.fecInicio = "";
+            vm.fecFin = "";
 
             vm.init = function () {
                 setTimeout(() => {
@@ -19,21 +21,29 @@ angular.module('reportesModule')
             }
 
             vm.check6Meses = function () {
-
+				console.log("check: " + vm.checkFechas);
+            	vm.fecInicio = diferenciaDias(new Date(), 0);
+		  		console.log("inicio: " + vm.fecInicio);
+            	vm.fecFin = diferenciaDias(new Date(), -180);
+				console.log("fin: " + vm.fecFin);
             }
 
             vm.buscarReportes = function () {
-            	var fechaInicio = diferenciaDias(new Date(), 0);
-		  		console.log("inicio: " + fechaInicio);
-            	var fechaFin = diferenciaDias(new Date(), -180);
-				console.log("fin: " + fechaFin);
-				$http.get(host + '/devolucionRest/rest/logistica/reporte/listarResumen', {
-        			params:  {clienteCodigo: 2, fechaInicio: fechaInicio, fechaTermino: fechaFin}
+            	if("6meses" === vm.checkFechas){
+            		vm.check6Meses();
+            	}else{
+            		vm.fecInicio = vm.calendarInicio;
+            		vm.fecFin = vm.calendarFin;
+            	}
+            	console.log("fecIniio " + vm.fecInicio);
+            	console.log("fecIniio " + vm.fecFin);
+				$http.get(host + '/devolucionRest/rest/logistica/reporte/listarEstado', {
+        			params:  {clienteCodigo: 2, fechaInicio: vm.fecInicio, fechaTermino: vm.fecFin}
     			})
                         .success(function (data) {
                             console.log(data)
                             vm.loadingGuardar = false;
-                            vm.cargarPerfil();
+                            //vm.cargarPerfil();
                         })
                         .error(function (data) {
                             console.log('Error:' + data);
