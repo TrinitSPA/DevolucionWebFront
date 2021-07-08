@@ -8,7 +8,7 @@
 	<div class="container-fluid header-personalizar py-2">
 		<div class="row align-items-center">
 			<div class="col">
-				<h4>Personalizar sitio</h4>
+				<h6 class="mb-0">Personalizar sitio</h6>
 			</div>
 			<div class="col">
 				<a href="#" class="text-white float-right d-flex align-items-center">
@@ -40,7 +40,7 @@
 					<ul class="list-unstyled text-left">
 						<li>
 							<label for="inputImagen2" class="text-grey d-block mb-1">
-								<img src="images/subir.svg" width="20" alt="">
+								<img src="images/subir.svg" width="18" alt="">
 								<a href="" class="text-grey">Subir imagen</a>
 								<button type="button" class="btn btn-secondary btn-tooltip" 
 											data-toggle="tooltip" data-placement="left" title="Tamaño de la imagen width:200px height:80px">
@@ -52,7 +52,7 @@
 						</li>
 						<li>
 							<a href="" class="text-grey d-block" ng-click="psCtrl.config.imagen2=''">
-								<img src="images/eliminar.svg" width="23" alt="" class="ml-n1">
+								<img src="images/eliminar.svg" width="18" alt="" class="ml-n1">
 								<span>Eliminar imagen</span>
 							</a>
 						</li>
@@ -81,13 +81,13 @@
 						<div class="col-9">
 							<!-- Texto antes de haer click en editar  -->
 							<div ng-if="!psCtrl.editarTitulo1" class="devolucion-texto d-flex align-items-center">
-								<h2 class="d-inline-block" ng-style="psCtrl.style.titulo1">
-									{{psCtrl.config.textoTitulo1}}</h2>
+								<h4 class="d-inline-block" ng-style="psCtrl.style.titulo1">
+									{{psCtrl.config.textoTitulo1}}</h4>
 								<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-1">
 									<ul class="list-unstyled text-left">
 										<li><a href="" class="text-grey d-block mb-1"
 												ng-click="psCtrl.editarTitulo1=true">
-												<img src="images/editar-texto.svg" width="20" alt="">
+												<img src="images/editar-texto.svg" width="18" alt="">
 												<span>Editar texto</span>
 											</a>
 										</li>
@@ -132,7 +132,7 @@
 									<li>
 										<label style="cursor: pointer;" class="text-grey d-block mb-1"
 											for="inputImagen1">
-											<img src="images/subir.svg" width="20" alt="">
+											<img src="images/subir.svg" width="18" alt="">
 											<a href="" class="text-grey">Subir imagen</a>
 											<button type="button" class="btn btn-secondary btn-tooltip" 
 											data-toggle="tooltip" data-placement="left" title="Tamaño del icono  width:200px height:80px">
@@ -144,7 +144,7 @@
 									</li>
 									<li>
 										<a href="" class="text-grey d-block" ng-click="psCtrl.config.imagen1=''">
-											<img src="images/eliminar.svg" width="23" alt="" class="ml-n1">
+											<img src="images/eliminar.svg" width="18" alt="" class="ml-n1">
 											<span>Eliminar imagen</span>
 										</a>
 									</li>
@@ -157,7 +157,7 @@
 					</div>
 				</div>
 				<div class="col-12">
-					<hr>
+					<hr class="my-2">
 				</div>
 				<div class="col-12">
 					<div class="row">
@@ -171,7 +171,7 @@
 									<ul class="list-unstyled text-left">
 										<li><a href="" class="text-grey d-block mb-1"
 												ng-click="psCtrl.editarTitulo2=true">
-												<img src="images/editar-texto.svg" width="20" alt="">
+												<img src="images/editar-texto.svg" width="18" alt="">
 												<span>Editar texto</span>
 											</a>
 										</li>
@@ -231,7 +231,7 @@
 				<div class="row justify-content-center mb-5 mt-2">
 					<div class="col-4 pr-0">
 						<div class="paso paso-uno align-items-start active">
-							<h6 ng-style="psCtrl.style.colorPasoTexto">PASO 1</h6>
+							<h6 ng-style="psCtrl.style.colorPasoTexto" class="mb-0">PASO 1</h6>
 							<div ng-style="psCtrl.style.colorPasoCirculo" class="circulo"></div>
 							<div class="linea"></div>
 						</div>
@@ -246,7 +246,7 @@
 					</div>
 					<div class="col-4 px-0">
 						<div class="paso paso-tres align-items-end">
-							<h6>PASO 2</h6>
+							<h6 class="mb-0">PASO 2</h6>
 							<div class="circulo"></div>
 							<div class="linea"></div>
 						</div>
@@ -261,7 +261,7 @@
 							<div ng-if="!psCtrl.config.ocultarEdicion" class="card-edicion ml-1">
 								<ul class="list-unstyled text-left">
 									<li><a href="" class="text-grey d-block mb-1" ng-click="psCtrl.editarTitulo3=true">
-											<img src="images/editar-texto.svg" width="20" alt="">
+											<img src="images/editar-texto.svg" width="18" alt="">
 											<span>Editar texto</span>
 										</a>
 									</li>
@@ -303,7 +303,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-12 col-md-10 px-5 pt-3 card-white pb-4">
+					<div class="col-12 col-md-10 px-5 pt-2 card-white pb-2">
 						<div class="row">
 							<div class="col-12 mb-3">
 								<div class="form-group">
