@@ -2,7 +2,7 @@ angular.module('reportesModule')
     .controller('reportesCtrl',
         ['$scope', '$http', '$state', '$location', function ($scope, $http, $state, $location) {
             var vm = this;
-            var host = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+            var host = $location.protocol() + '://' + $location.host() + ':8081';
             vm.checkFechas = "6meses"
 
             vm.mesInicio = "10"
@@ -23,6 +23,22 @@ angular.module('reportesModule')
             }
 
             vm.buscarReportes = function () {
+            	var fechaInicio = diferenciaDias(new Date(), 0);
+		  		console.log("inicio: " + fechaInicio);
+            	var fechaFin = diferenciaDias(new Date(), -180);
+				console.log("fin: " + fechaFin);
+				$http.get(host + '/devolucionRest/rest/logistica/reporte/listarResumen', {
+        			params:  {clienteCodigo: 2, fechaInicio: fechaInicio, fechaTermino: fechaFin}
+    			})
+                        .success(function (data) {
+                            console.log(data)
+                            vm.loadingGuardar = false;
+                            vm.cargarPerfil();
+                        })
+                        .error(function (data) {
+                            console.log('Error:' + data);
+                            vm.loadingGuardar = false;
+                        }); 
 
             }
 
@@ -106,3 +122,9 @@ angular.module('reportesModule')
             vm.monthsText = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
         }]);
+        
+        const diferenciaDias = function(fecha, dias){
+		  	fecha.setDate(fecha.getDate() + dias);
+		  	var m = moment(fecha, 'dd/MM/yyyy', true).format('DD-MM-YYYY');
+		  	return m;
+		}
