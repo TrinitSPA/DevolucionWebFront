@@ -128,6 +128,42 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                     templateUrl: 'app/components/header/header.html'
                 },
                 content: {
+                    templateUrl: 'app/components/reportes/MenuReportes.html'
+                }
+                
+            }
+        })
+        .state('reportesEstado', {
+            url: '/reportesEstado',
+            views: {
+                header: {
+                    templateUrl: 'app/components/header/header.html'
+                },
+                content: {
+                    templateUrl: 'app/components/reportes/reportes.html'
+                }
+                
+            }
+        })
+        .state('reportesMotivo', {
+            url: '/reportesMotivo',
+            views: {
+                header: {
+                    templateUrl: 'app/components/header/header.html'
+                },
+                content: {
+                    templateUrl: 'app/components/reportes/reportes.html'
+                }
+                
+            }
+        })
+        .state('reportesMacroEstado', {
+            url: '/reportesMacroEstado',
+            views: {
+                header: {
+                    templateUrl: 'app/components/header/header.html'
+                },
+                content: {
                     templateUrl: 'app/components/reportes/reportes.html'
                 }
                 

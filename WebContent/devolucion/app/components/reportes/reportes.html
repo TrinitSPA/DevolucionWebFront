@@ -3,11 +3,11 @@
     <div class="container">
         <form name="myForm" novalidate></form>
         <div class="row">
-            <div class="col-12 mt-2 pt-2">
-                <div class="card mt-5 p-2 pb-5">
+            <div class="col-12 mt-1 pt-1">
+                <div class="card mt-5 p-1 pb-2">
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="pl-4 mt-2 text-grey mb-5">Generar reporte</h2>
+                        	<h6 class="pl-4 mt-1 text-grey mb-3">Selección de Fechas para Generar Reportes</h6>
                             <div class="pl-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="exampleRadios"
@@ -25,14 +25,9 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 mt-5" id="fechas">
-                <div class="card mt-5 p-2 pb-3">
-                    <div class="row pt-3 pl-2">
-                        <div class="col-3">
+                            <!-- aqui -->
+                            <div class="row pt-3 pl-2">
+                        <div class="pl-4 col-3">
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1" class="text-dark">Fecha de inicio</label>
                                 <select class="form-control" ng-model="rCtrl.mesInicio" id="exampleFormControlSelect1"
@@ -49,16 +44,6 @@
                                     <option value="10">Octubre</option>
                                     <option value="11">Noviembre</option>
                                     <option value="12">Diciembre</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">&nbsp;</label>
-                                <select class="form-control" ng-model="rCtrl.annoInicio" id="exampleFormControlSelect1"
-                                    ng-disabled="rCtrl.loading || rCtrl.checkFechas == '6meses'">
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
                                 </select>
                             </div>
                         </div>
@@ -82,28 +67,23 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">&nbsp;</label>
-                                <select class="form-control" ng-model="rCtrl.annoFin" id="exampleFormControlSelect1"
-                                    ng-disabled="rCtrl.loading || rCtrl.checkFechas == '6meses'">
-                                    <option value="2021">2021</option>
-                                    <option value="2020">2020</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 text-right mt-3 mb-3">
+                        <div class="pl-4 col-12 text-left mt-1 mb-1">
                             <button ng-disabled="rCtrl.loading" ng-click="rCtrl.buscarReportes()" type="button"
                                 class="btn btn-primary">Ver movimientos</button>
                         </div>
                     </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-12 mt-5" ng-if="!rCtrl.loading">
-                <canvas width="200" height="100px" class="chart chart-bar mt-5" chart-data="rCtrl.dataResumen"
-                    chart-labels="rCtrl.labelsResumen" chart-series="rCtrl.seriesResumen"
-                    chart-options="rCtrl.optionsResumen">
-                </canvas>
+            
+            <div class="col-12 mt-0" ng-if="!rCtrl.loading">
+            	<div class="card mt-0 p-2 pb-2">
+	                <canvas class="chart chart-bar mt-2" chart-data="rCtrl.dataResumen"
+	                    chart-labels="rCtrl.labelsResumen" chart-series="rCtrl.seriesResumen"
+	                    chart-options="rCtrl.optionsResumen">
+	                </canvas>
+                 </div>
             </div>
 
 
@@ -111,6 +91,8 @@
     </div>
 
     <div ng-if="rCtrl.loading" class="container text-center mt-5">
-        Cargando...
+    	<div class="card mt-0 p-2 pb-2">
+        	Cargando...
+        </div>
     </div>
 </div>
