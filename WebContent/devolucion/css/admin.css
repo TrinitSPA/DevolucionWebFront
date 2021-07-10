@@ -541,3 +541,7 @@ datepicker{
 .btn-validar .card-edicion{
     padding: 3px 12px;
 }
+
+.calendar::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}

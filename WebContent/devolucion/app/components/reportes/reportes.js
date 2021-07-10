@@ -5,10 +5,10 @@ angular.module('reportesModule')
             var host = $location.protocol() + '://' + $location.host() + ':8081';
             vm.checkFechas = "6meses"
 
-            vm.mesInicio = "10"
-            vm.annoInicio = "2020"
-            vm.mesFin = "11"
-            vm.annoFin = "2020"
+            vm.currentDate = new Date();
+            vm.fechaInicio = new Date();
+            vm.fechaInicio.setMonth(vm.currentDate.getMonth() - 6);
+            vm.fechaFin = new Date();
 
             vm.loading = true;
             vm.fecInicio = "";
@@ -21,34 +21,28 @@ angular.module('reportesModule')
             }
 
             vm.check6Meses = function () {
-				console.log("check: " + vm.checkFechas);
-            	vm.fecInicio = diferenciaDias(new Date(), 0);
-		  		console.log("inicio: " + vm.fecInicio);
-            	vm.fecFin = diferenciaDias(new Date(), -180);
-				console.log("fin: " + vm.fecFin);
+                vm.fechaInicio = new Date();
+                vm.fechaInicio.setMonth(vm.currentDate.getMonth() - 6);
+                vm.fechaFin = new Date()
             }
 
             vm.buscarReportes = function () {
-            	if("6meses" === vm.checkFechas){
-            		vm.check6Meses();
-            	}else{
-            		vm.fecInicio = vm.calendarInicio;
-            		vm.fecFin = vm.calendarFin;
-            	}
-            	console.log("fecIniio " + vm.fecInicio);
-            	console.log("fecIniio " + vm.fecFin);
-				$http.get(host + '/devolucionRest/rest/logistica/reporte/listarEstado', {
-        			params:  {clienteCodigo: 2, fechaInicio: vm.fecInicio, fechaTermino: vm.fecFin}
-    			})
-                        .success(function (data) {
-                            console.log(data)
-                            vm.loadingGuardar = false;
-                            //vm.cargarPerfil();
-                        })
-                        .error(function (data) {
-                            console.log('Error:' + data);
-                            vm.loadingGuardar = false;
-                        }); 
+
+                const fechaInicio = moment(vm.fechaInicio).format('DD-MM-YYYY');
+                const fechaFin = moment(vm.fechaFin).format('DD-MM-YYYY');
+
+                $http.get(host + '/devolucionRest/rest/logistica/reporte/listarEstado', {
+                    params: { clienteCodigo: 2, fechaInicio: fechaInicio, fechaTermino: fechaFin }
+                })
+                    .success(function (data) {
+                        console.log(data)
+                        vm.loadingGuardar = false;
+                        //vm.cargarPerfil();
+                    })
+                    .error(function (data) {
+                        console.log('Error:' + data);
+                        vm.loadingGuardar = false;
+                    });
 
             }
 
@@ -132,9 +126,3 @@ angular.module('reportesModule')
             vm.monthsText = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
 
         }]);
-        
-        const diferenciaDias = function(fecha, dias){
-		  	fecha.setDate(fecha.getDate() + dias);
-		  	var m = moment(fecha, 'dd/MM/yyyy', true).format('DD-MM-YYYY');
-		  	return m;
-		}

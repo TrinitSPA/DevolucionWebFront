@@ -7,7 +7,7 @@
                 <div class="card mt-5 p-1 pb-2">
                     <div class="row">
                         <div class="col-12">
-                        	<h6 class="pl-4 mt-1 text-grey mb-3">Selección de Fechas para Generar Reportes</h6>
+                            <h6 class="pl-4 mt-1 text-grey mb-3">Selección de Fechas para Generar Reportes</h6>
                             <div class="pl-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="exampleRadios"
@@ -19,7 +19,8 @@
                                 </div>
                                 <div class="form-check mt-2">
                                     <input class="form-check-input" ng-model="rCtrl.checkFechas" type="radio"
-                                        name="exampleRadios" id="exampleRadios2" value="rango" ng-disabled="rCtrl.loading">
+                                        name="exampleRadios" id="exampleRadios2" value="rango"
+                                        ng-disabled="rCtrl.loading">
                                     <label class="form-check-label text-grey" for="exampleRadios2">
                                         Rango de fechas
                                     </label>
@@ -27,63 +28,42 @@
                             </div>
                             <!-- aqui -->
                             <div class="row pt-3 pl-2">
-                        <div class="pl-4 col-3">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1" class="text-dark">Fecha de inicio</label>
-                                <select class="form-control" ng-model="rCtrl.mesInicio" id="exampleFormControlSelect1"
-                                    ng-disabled="rCtrl.loading || rCtrl.checkFechas == '6meses'">
-                                    <option value="01">Enero</option>
-                                    <option value="02">Febrero</option>
-                                    <option value="03">Marzo</option>
-                                    <option value="04">Abril</option>
-                                    <option value="05">Mayo</option>
-                                    <option value="06">Junio</option>
-                                    <option value="07">Julio</option>
-                                    <option value="08">Agosto</option>
-                                    <option value="09">Septiembre</option>
-                                    <option value="10">Octubre</option>
-                                    <option value="11">Noviembre</option>
-                                    <option value="12">Diciembre</option>
-                                </select>
+                                <div class="pl-4 col-3">
+                                    <div class="form-group">
+                                        <label for="fechaInicio" class="text-dark">Fecha de inicio</label>
+                                        <input class="form-control calendar" type="date" id="fechaInicio"
+                                            ng-model="rCtrl.fechaInicio" placeholder="yyyy-MM-dd"
+                                            ng-disabled="rCtrl.loading || rCtrl.checkFechas == '6meses'"
+                                            max="{{rCtrl.currentDate | date: 'yyyy-MM-dd'}}" required />
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="fechaFin" class="text-dark">Fecha de
+                                            término</label>
+                                        <input class="form-control calendar" type="date" id="fechaFin"
+                                            ng-model="rCtrl.fechaFin" placeholder="yyyy-MM-dd"
+                                            ng-disabled="rCtrl.loading || rCtrl.checkFechas == '6meses'"
+                                            max="{{rCtrl.currentDate | date: 'yyyy-MM-dd'}}" required />
+                                    </div>
+                                </div>
+                                <div class="pl-4 col-12 text-left mt-1 mb-1">
+                                    <button ng-disabled="rCtrl.loading" ng-click="rCtrl.buscarReportes()" type="button"
+                                        class="btn btn-primary">Ver movimientos</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1" class="text-dark">Fecha de término</label>
-                                <select class="form-control" ng-model="rCtrl.mesFin" id="exampleFormControlSelect1"
-                                    ng-disabled="rCtrl.loading || rCtrl.checkFechas == '6meses'">
-                                    <option value="01">Enero</option>
-                                    <option value="02">Febrero</option>
-                                    <option value="03">Marzo</option>
-                                    <option value="04">Abril</option>
-                                    <option value="05">Mayo</option>
-                                    <option value="06">Junio</option>
-                                    <option value="07">Julio</option>
-                                    <option value="08">Agosto</option>
-                                    <option value="09">Septiembre</option>
-                                    <option value="10">Octubre</option>
-                                    <option value="11">Noviembre</option>
-                                    <option value="12">Diciembre</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="pl-4 col-12 text-left mt-1 mb-1">
-                            <button ng-disabled="rCtrl.loading" ng-click="rCtrl.buscarReportes()" type="button"
-                                class="btn btn-primary">Ver movimientos</button>
-                        </div>
-                    </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-12 mt-0" ng-if="!rCtrl.loading">
-            	<div class="card mt-0 p-2 pb-2">
-	                <canvas class="chart chart-bar mt-2" chart-data="rCtrl.dataResumen"
-	                    chart-labels="rCtrl.labelsResumen" chart-series="rCtrl.seriesResumen"
-	                    chart-options="rCtrl.optionsResumen">
-	                </canvas>
-                 </div>
+                <div class="card mt-0 p-2 pb-2">
+                    <canvas class="chart chart-bar mt-2" chart-data="rCtrl.dataResumen"
+                        chart-labels="rCtrl.labelsResumen" chart-series="rCtrl.seriesResumen"
+                        chart-options="rCtrl.optionsResumen">
+                    </canvas>
+                </div>
             </div>
 
 
@@ -91,8 +71,8 @@
     </div>
 
     <div ng-if="rCtrl.loading" class="container text-center mt-5">
-    	<div class="card mt-0 p-2 pb-2">
-        	Cargando...
+        <div class="card mt-0 p-2 pb-2">
+            Cargando...
         </div>
     </div>
 </div>
