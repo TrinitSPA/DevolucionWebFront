@@ -7,7 +7,7 @@
                 <div class="card mt-5 p-1 pb-2">
                     <div class="row">
                         <div class="col-12">
-                            <h6 class="pl-4 mt-1 text-grey mb-3">Selección de Fechas para Generar Reportes</h6>
+                            <h6 class="pl-4 mt-1 text-grey mb-3">Generar Reportes por Estados</h6>
                             <div class="pl-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="exampleRadios"
@@ -57,8 +57,8 @@
                 </div>
             </div>
 
-            <div class="col-12 mt-0" ng-if="!rCtrl.loading">
-                <div class="card mt-0 p-2 pb-2">
+            <div class="col-12 mt-0" id="grafico">
+                <div class="card mt-0 p-2 pb-2" id="grafico2">
                     <canvas class="chart chart-bar mt-2" chart-data="rCtrl.dataResumen"
                         chart-labels="rCtrl.labelsResumen" chart-series="rCtrl.seriesResumen"
                         chart-options="rCtrl.optionsResumen">
@@ -70,9 +70,14 @@
         </div>
     </div>
 
-    <div ng-if="rCtrl.loading" class="container text-center mt-5">
+    <div ng-if="rCtrl.loading" class="container text-center mt-5" id="mensajee">
         <div class="card mt-0 p-2 pb-2">
             Cargando...
+        </div>
+    </div>
+    <div class="container text-center mt-5" style="display: none;" id="ContenedorMensaje">
+        <div class="card mt-0 p-2 pb-2" id="mensaje">
+            
         </div>
     </div>
 </div>

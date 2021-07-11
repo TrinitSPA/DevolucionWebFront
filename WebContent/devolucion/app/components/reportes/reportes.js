@@ -10,14 +10,16 @@ angular.module('reportesModule')
             vm.fechaInicio.setMonth(vm.currentDate.getMonth() - 6);
             vm.fechaFin = new Date();
 
-            vm.loading = true;
+			vm.mensaje = "Cargando...";
+            //vm.loading = true;
             vm.fecInicio = "";
             vm.fecFin = "";
-
+			$('#grafico').hide();
             vm.init = function () {
-                setTimeout(() => {
-                    vm.procesarReportes(vm.dataTest);
-                }, 2000);
+                	$('#ContenedorMensaje').hide();
+                	$('#grafico').hide();
+                	//vm.check6Meses();
+                    //vm.buscarReportes();
             }
 
             vm.check6Meses = function () {
@@ -27,19 +29,32 @@ angular.module('reportesModule')
             }
 
             vm.buscarReportes = function () {
+            
+            	vm.loading = true;
 
                 const fechaInicio = moment(vm.fechaInicio).format('DD-MM-YYYY');
                 const fechaFin = moment(vm.fechaFin).format('DD-MM-YYYY');
 
                 $http.get(host + '/devolucionRest/rest/logistica/reporte/listarEstado', {
-                    params: { clienteCodigo: 2, fechaInicio: fechaInicio, fechaTermino: fechaFin }
+                    params: { clienteCodigo: 1, fechaInicio: fechaInicio, fechaTermino: fechaFin }
                 })
                     .success(function (data) {
                         console.log(data)
+                        vm.loading = false;
                         vm.loadingGuardar = false;
-                        //vm.cargarPerfil();
+                    
+                        if(data.length === 0){                       	
+                        	$('#mensaje').html('No se han encontrado registros.');
+                            $('#ContenedorMensaje').show();
+                            $('#grafico').hide();
+                        } else {
+                        	$('#ContenedorMensaje').hide();
+                        	$('#grafico').show();
+                        	vm.procesarReportes(data);
+                        }
                     })
                     .error(function (data) {
+                    	vm.loading = false;
                         console.log('Error:' + data);
                         vm.loadingGuardar = false;
                     });

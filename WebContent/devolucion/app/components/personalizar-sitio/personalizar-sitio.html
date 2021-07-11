@@ -1,4 +1,12 @@
 <!-- Personalizar sitio  -->
+<script>
+function atras(){
+	$('#exampleModal').hide();
+	setTimeout(() => {
+		window.location='#dashboard-edicion';
+	 }, 200);
+}
+</script>
 <div class="clean-body m-0 p-0 personalizar-sitio" ng-init="psCtrl.init()">
 	<!--
 	<style>
@@ -42,7 +50,7 @@
 						<li>
 							<label for="inputImagen2" class="text-grey d-block mb-1">
 								<img src="images/subir.svg" width="18" alt="">
-								<a href="" class="text-grey">Subir imagen</a>
+								<span>Subir imagen</span>
 								<button type="button" class="btn btn-secondary btn-tooltip" 
 											data-toggle="tooltip" data-placement="left" title="Tamaño de la imagen width:200px height:80px">
 											i 
@@ -134,7 +142,7 @@
 										<label style="cursor: pointer;" class="text-grey d-block mb-1"
 											for="inputImagen1">
 											<img src="images/subir.svg" width="18" alt="">
-											<a href="" class="text-grey">Subir imagen</a>
+											<span>Subir imagen</span>
 											<button type="button" class="btn btn-secondary btn-tooltip" 
 											data-toggle="tooltip" data-placement="left" title="Tamaño del icono  width:200px height:80px">
 											i 
@@ -420,7 +428,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="window.location='#dashboard-edicion'">Salir sin guardar1</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="atras();">Salir sin guardar</button>
 			</div>
 		</div>
 	</div>
