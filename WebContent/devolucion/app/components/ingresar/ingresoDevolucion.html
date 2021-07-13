@@ -27,8 +27,8 @@
 				<div class="row justify-content-center mb-5 mt-2">
 					<div class="col-4 pr-0">
 						<div class="paso paso-uno align-items-start active">
-							<h6 ng-style="psCtrl.style.colorPasoTexto" class="mb-0">PASO 1</h6>
-							<div ng-style="psCtrl.style.colorPasoCirculo" class="circulo"></div>
+							<h6 ng-style="inCtrl.style.colorPasoTexto" class="mb-0">PASO 1</h6>
+							<div ng-style="inCtrl.style.colorPasoCirculo" class="circulo"></div>
 							<div class="linea"></div>
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 									<select id="codigoMotivo"
 										class="form-control col-6 justify-content-start" required ng-init="inCtrl.cargarMotivos()"
 										ng-model="inCtrl.formData.codigoMotivo"
-										ng-options="option.nombreMotivo for option in inCtrl.formData.motivos track by option.codigoMotivo">
+										ng-options="option.nombre for option in inCtrl.formData.motivos track by option.codigo">
 									</select>
 								</div>
 							</div>
@@ -93,7 +93,7 @@
 			<section class="etapas">
 				<div class="row justify-content-center">
 					<div class="col-4 pr-0">
-						<div class="paso paso-uno align-items-start done">
+						<div class="paso paso-uno align-items-start start">
 							<h5>PASO 1</h5>
 							<div class="circulo"></div>
 							<div class="linea"></div>
@@ -116,7 +116,7 @@
 							<div class="col-12 col-md-6" id="validacion-live">
 								<div class="form-group">
 									<label for="inputEmail">RUT*</label> <input type="text" class="form-control"
-										id="rut" name="rut" ng-change="inCtrl.validarRut()" placeholder="Ej: 21216322-5"
+										id="rut" name="rut" ng-click="inCtrl.init()"" ng-change="inCtrl.init()" placeholder="Ej: 21216322-5"
 										ng-model="inCtrl.formData.rut" required>
 									<span id="errorRut" style="color:red">
 										<span ng-show="inCtrl.errors.rutVacio">Rut es obligatorio.</span>

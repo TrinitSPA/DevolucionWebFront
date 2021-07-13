@@ -95,10 +95,10 @@ angular.module('ingresoModule')
             };
 
             vm.cargarMotivos = function (form) {
-                $http.get(host + '/devolucionRest/rest/logistica/motivos')
+                $http.get(host + '/devolucionRest/rest/logistica/motivo/listar')
                     .success(function (data) {
                         vm.formData.motivos = data;
-                        vm.formData.codigoMotivo = data[0];
+                        vm.formData.codigoMotivo = data[1].codigo;
                     })
                     .error(function (data) {
                         console.log('Error:' + data);
@@ -106,14 +106,18 @@ angular.module('ingresoModule')
             };
 
             vm.init = function () {
-            	console.log("entre");
             	vm.cargarPerfil();
                 $('#paso2').hide();
                 $('#paso3').hide();
             }
 
             vm.goPasoDos = function () {
-                $http.get(host + '/devolucionRest/rest/logistica/consultarOS/' + vm.formData.ordenCompra + '/' + vm.formData.eCommerce)
+            	if(vm.formData.validaOS === 0){
+            		$('#paso1').hide();
+                    $('#paso2').show();
+                    $('#paso3').hide();
+            	} else {
+            		$http.get(host + '/devolucionRest/rest/logistica/ordenServicio/listar?clienteCodigo=' + vm.formData.eCommerce + '&numeroDocumento=' + vm.formData.ordenCompra)
                     .success(function (data) {
                         if (true == data) {
                             $('#paso1').hide();
@@ -123,12 +127,11 @@ angular.module('ingresoModule')
                             $("#myModal").modal('show');
                             //window.alert('Nª Orden Servicio / Empresa no coinciden.');
                         }
-
                     })
                     .error(function (data) {
                         console.log('Error:' + data);
                     });
-
+            	}
             };
 
             vm.goPasoUno = function () {
@@ -139,8 +142,7 @@ angular.module('ingresoModule')
                 return !vm.errors.rutFormato && !vm.errors.rutVacio;
             }
 
-            vm.validarRut = () => {
-
+            vm.validarRut = function () {
                 vm.formData.rut = vm.formData.rut.replace(/[^\d-k]/g, "")
 
                 if (!vm.formData.rut) {
@@ -207,6 +209,8 @@ angular.module('ingresoModule')
             	$http.get(host + '/devolucionRest/rest/logistica/configuracion/ecommerce/'+urlEncrip)
                         .success(function (data) {
                         	vm.formData.eCommerce = data[0].configuracion.clienteCodigo;
+                        	vm.formData.validaOS = data[0].configuracion.validarOser;
+                        	console.log("vm.formData.validaOS: " + vm.formData.validaOS);
                         	console.log("codigoCliente: " + vm.formData.eCommerce);
                             vm.config.imagen1.base64 = data[0].frontEnd.headerLogo;
                             vm.config.imagen2.base64 = data[0].frontEnd.headerIcono;

@@ -79,10 +79,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
         .state('dashboard-edicion', {
-            url: '/dashboard-edicion/:username',
-            controller: function ($stateParams) {
-            	console.log('username: '+$stateParams.username);
-        	},
+            url: '/dashboard-edicion',
             views: {
                 header: {
                     templateUrl: 'app/components/header/header.html',
