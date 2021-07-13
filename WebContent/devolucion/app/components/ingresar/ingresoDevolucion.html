@@ -1,19 +1,21 @@
-<div ng-controller="ingresoCtrl as inCtrl" ng-init="inCtrl.ocultar()" class="clean-body"
+<div ng-controller="ingresoCtrl as inCtrl" ng-init="inCtrl.init()" class="clean-body m-0 p-0 personalizar-sitio"
 	style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%;">
 	<section class="hero-msg">
 		<div class="container">
 			<div class="row">
 				<div class="col-12 d-flex justify-content-between align-items-center">
-					<h2>Devolución Web</h2>
-					<img src="images/box-header.png" width="55" alt="">
+					<h2>{{inCtrl.config.textoTitulo1}}</h2>
+					<img ng-if="!inCtrl.config.imagen1" src="images/box-header.png" width="55" alt="">
+					<img ng-if="inCtrl.config.imagen1"
+								ng-src="{{'data:image/png;base64,' + inCtrl.config.imagen1.base64}}" width="55"
+								alt="">
 				</div>
 				<div class="col-12">
 					<hr>
 				</div>
 				<div class="col-12">
 					<h6>
-						¿Necesitas realizar una devolución? Completa el siguiente
-						formulario:
+						{{inCtrl.config.textoTitulo2}}
 					</h6>
 				</div>
 			</div>
@@ -22,17 +24,17 @@
 	<form name="myForm">
 		<div class="container mb-5" id="paso1" name="paso1">
 			<section class="etapas">
-				<div class="row justify-content-center">
+				<div class="row justify-content-center mb-5 mt-2">
 					<div class="col-4 pr-0">
 						<div class="paso paso-uno align-items-start active">
-							<h5>PASO 1</h5>
-							<div class="circulo"></div>
+							<h6 ng-style="psCtrl.style.colorPasoTexto" class="mb-0">PASO 1</h6>
+							<div ng-style="psCtrl.style.colorPasoCirculo" class="circulo"></div>
 							<div class="linea"></div>
 						</div>
 					</div>
 					<div class="col-4 px-0">
-						<div class="paso paso-tres align-items-end ">
-							<h5>PASO 2</h5>
+						<div class="paso paso-tres align-items-end">
+							<h6 class="mb-0">PASO 2</h6>
 							<div class="circulo"></div>
 							<div class="linea"></div>
 						</div>
@@ -41,7 +43,7 @@
 			</section>
 			<section class="inputs-forms mt-1">
 				<div class="row form-inline justify-content-center">
-					<h5 class="col-12 col-md-10 pl-0">DATOS DEL PRODUCTO</h5>
+					<h5 class="col-12 col-md-10 pl-0">{{inCtrl.config.textoTitulo3}}</h5>
 					<div class="col-12 col-md-10 px-5 pt-3 card-white pb-4">
 						<div class="row">
 							<div class="col-12 mb-3">

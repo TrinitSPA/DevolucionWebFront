@@ -86,6 +86,7 @@ angular.module('personalizarSitioModule')
                 }
 
                 vm.init = function () {
+                	console.log("entre");
                     vm.cargarPerfil();
                 }
 

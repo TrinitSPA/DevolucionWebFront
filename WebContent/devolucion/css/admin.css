@@ -30,7 +30,7 @@ hr {
 
 .personalizar-sitio .etapas .paso.active .circulo,
 .personalizar-sitio .etapas .paso.done .circulo {
-    background: #39c0e0;
+    background: #5ad2f9e6;
     border: solid 12px #5ad2f9e6;
     background-clip: padding-box;
 }
@@ -65,7 +65,7 @@ hr {
 }
 
 .etapas .paso.done .linea {
-    background: #39c0e0;
+    background: #e2e0e0;
 }
 
 .etapas .paso h2 {
@@ -118,7 +118,7 @@ hr {
 }
 
 .etapas .paso.paso-dos.active .linea {
-    background: #39c0e0;
+    background: #e2e0e0;
     background: linear-gradient(90deg, rgba(57, 192, 224, 1) 0%, rgba(57, 192, 224, 1) 50%, rgba(226, 224, 224, 1) 50%, rgba(226, 224, 224, 1) 100%);
 }
 

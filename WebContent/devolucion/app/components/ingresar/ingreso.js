@@ -1,11 +1,61 @@
 angular.module('ingresoModule')
     .controller('ingresoCtrl',
-        ['$scope', '$http', '$state', 'ingresoService', '$location', function ($scope, $http, $state, ingresoService, $location) {
+        ['$scope', '$http', '$state', 'ingresoService', '$location', '$stateParams', function ($scope, $http, $state, ingresoService, $location, $stateParams) {
             var vm = this;
-            var host = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+            var urlEncrip = $stateParams.idEcommerce;
+            var host = $location.protocol() + '://' + $location.host() + ':8081';
+            
             vm.formData = {
             };
             vm.errors = {};
+            vm.config = {
+                    textoTitulo1: "Devolución Web1",
+                    colorTitulo1: "858196",
+                    textoTitulo2: "¿Necesitas realizar una devolución? Completa el siguiente formulario1:",
+                    colorTitulo2: "39c0e0",
+                    colorFondo1: "134085",
+                    colorFondo2: "e0f1f7",
+                    imagen1: {
+                        base64: imagen1
+                    },
+                    imagen2: {
+                        base64: imagen2
+                    },
+                    colorPaso: "39c0e0",
+                    textoTitulo3: "DATOS DEL PRODUCTO1",
+                    colorFondo3: "f4f4f4",
+                    colorBoton: "0033a0",
+                }
+
+                vm.style = {
+                    titulo1: {
+                        color: "#" + vm.config.colorTitulo1
+                    },
+                    titulo2: {
+                        color: "#" + vm.config.colorTitulo2
+                    },
+                    colorFondo1: {
+                        "background-color": "#" + vm.config.colorFondo1
+                    },
+                    colorFondo2: {
+                        background: "#" + vm.config.colorFondo2
+                    },
+                    colorFondo3: {
+                        background: "#" + vm.config.colorFondo3
+                    },
+                    colorPasoTexto: {
+                        color: "#" + vm.config.colorPaso
+                    },
+                    colorPasoCirculo: {
+                        background: "#" + vm.config.colorPaso,
+                        "border-color": "#" + vm.config.colorPaso
+                    },
+                    colorBoton: {
+                        "background-color": "#" + vm.config.colorBoton,
+                        "border-color": "#" + vm.config.colorBoton
+                    }
+                }
+                
             vm.createTodo = function (form1, form2) {
                 var dataEnviar = angular.copy(vm.formData);
                 dataEnviar.codigoEmpresa = dataEnviar.codigoEmpresa.codigoEmpresa;
@@ -55,13 +105,15 @@ angular.module('ingresoModule')
                     });
             };
 
-            vm.ocultar = function () {
+            vm.init = function () {
+            	console.log("entre");
+            	vm.cargarPerfil();
                 $('#paso2').hide();
                 $('#paso3').hide();
             }
 
             vm.goPasoDos = function () {
-                $http.get(host + '/devolucionRest/rest/logistica/consultarOS/' + vm.formData.ordenCompra + '/' + vm.formData.codigoEmpresa.codigoEmpresa)
+                $http.get(host + '/devolucionRest/rest/logistica/consultarOS/' + vm.formData.ordenCompra + '/' + vm.formData.eCommerce)
                     .success(function (data) {
                         if (true == data) {
                             $('#paso1').hide();
@@ -142,6 +194,63 @@ angular.module('ingresoModule')
                 for (; T; T = Math.floor(T / 10))
                     S = (S + T % 10 * (9 - M++ % 6)) % 11;
                 return S ? S - 1 : 'k';
+            }
+            
+            vm.cargarPerfil = function () {
+            		//f9bfa23461a398a8f9687b4a70267e8d
+            		if("generic" !== urlEncrip){
+            			vm.cargarInfoPerfil();
+            		}
+            }
+            
+            vm.cargarInfoPerfil = function () {
+            	$http.get(host + '/devolucionRest/rest/logistica/configuracion/ecommerce/'+urlEncrip)
+                        .success(function (data) {
+                        	vm.formData.eCommerce = data[0].configuracion.clienteCodigo;
+                        	console.log("codigoCliente: " + vm.formData.eCommerce);
+                            vm.config.imagen1.base64 = data[0].frontEnd.headerLogo;
+                            vm.config.imagen2.base64 = data[0].frontEnd.headerIcono;
+                            vm.config.colorFondo1 = data[0].frontEnd.backgroundColor;
+                            vm.config.textoTitulo1 = data[0].frontEnd.title;
+                            vm.config.textoTitulo2 = data[0].frontEnd.subtitle;
+                            vm.config.colorFondo2 = data[0].frontEnd.headerColourBottom;
+                            vm.config.colorTitulo2 = data[0].frontEnd.headerColourText;
+                            vm.config.textoTitulo3 = data[0].frontEnd.entryProduct;
+                            vm.config.colorFondo3 = data[0].frontEnd.entryColour;
+                            vm.config.colorBoton = data[0].frontEnd.entryValidateButton;
+
+                            vm.style = {
+                                titulo1: {
+                                    color: "#" + vm.config.colorTitulo1
+                                },
+                                titulo2: {
+                                    color: "#" + vm.config.colorTitulo2
+                                },
+                                colorFondo1: {
+                                    "background-color": "#" + vm.config.colorFondo1
+                                },
+                                colorFondo2: {
+                                    background: "#" + vm.config.colorFondo2
+                                },
+                                colorFondo3: {
+                                    background: "#" + vm.config.colorFondo3
+                                },
+                                colorPasoTexto: {
+                                    color: "#" + vm.config.colorPaso
+                                },
+                                colorPasoCirculo: {
+                                    background: "#" + vm.config.colorPaso,
+                                    "border-color": "#" + vm.config.colorPaso
+                                },
+                                colorBoton: {
+                                    "background-color": "#" + vm.config.colorBoton,
+                                    "border-color": "#" + vm.config.colorBoton
+                                }
+                            }
+                        })
+                        .error(function (data) {
+                            console.log('Error:' + data);
+                        });
             }
 
 

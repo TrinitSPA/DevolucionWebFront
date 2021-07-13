@@ -2,6 +2,7 @@ var app = angular.module('myAppRouter', ['ui.router', 'headerDinamicoModule', 'p
 
 app.config(function ($stateProvider, $urlRouterProvider) {
 
+	//console.log("pagina: " + $stateParams);
     $urlRouterProvider.otherwise('/login');
 
     $stateProvider
@@ -53,12 +54,17 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
         .state('ingresar', {
-            url: '/ingresar',
-            views: {
-                header: {
-                    templateUrl: 'app/components/header-dinamico/header-edicion.html',
-                    controller: 'headerDinamicoCtrl as hdCtrl'                    
-                },
+            url: '/ingresar/:idEcommerce',
+            controller: function($stateParams){
+		      $stateParams.idEcommerce  //*** Exists! ***//
+		    },
+		    resolve:{
+		       contactId: ['$stateParams', function($stateParams){
+		      	   console.log('a ' + $stateParams.idEcommerce); 	
+		           return $stateParams.idEcommerce;
+		       }]
+		    }, 
+		    views: {
                 content: {
                     templateUrl: 'app/components/ingresar/ingresoDevolucion.html'
                 }
@@ -73,7 +79,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             }
         })
         .state('dashboard-edicion', {
-            url: '/dashboard-edicion',
+            url: '/dashboard-edicion/:username',
+            controller: function ($stateParams) {
+            	console.log('username: '+$stateParams.username);
+        	},
             views: {
                 header: {
                     templateUrl: 'app/components/header/header.html',
