@@ -151,14 +151,14 @@ app.config(function ($stateProvider, $urlRouterProvider) {
                 
             }
         })
-        .state('reportesMotivo', {
-            url: '/reportesMotivo',
+        .state('reportesMotivos', {
+            url: '/reportesMotivos',
             views: {
                 header: {
                     templateUrl: 'app/components/header/header.html'
                 },
                 content: {
-                    templateUrl: 'app/components/reportes/reportes.html'
+                    templateUrl: 'app/components/reportes/reportesMotivos.html'
                 }
                 
             }
