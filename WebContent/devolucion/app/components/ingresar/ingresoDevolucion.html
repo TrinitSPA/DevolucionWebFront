@@ -83,7 +83,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
 			</section>
 		</div>
 	</form>
@@ -116,7 +115,7 @@
 							<div class="col-12 col-md-6" id="validacion-live">
 								<div class="form-group">
 									<label for="inputEmail">RUT*</label> <input type="text" class="form-control"
-										id="rut" name="rut" ng-click="inCtrl.init()"" ng-change="inCtrl.init()" placeholder="Ej: 21216322-5"
+										id="rut" name="rut" ng-click="inCtrl.validarRut()" ng-change="inCtrl.validarRut()" placeholder="Ej: 21216322-5"
 										ng-model="inCtrl.formData.rut" required>
 									<span id="errorRut" style="color:red">
 										<span ng-show="inCtrl.errors.rutVacio">Rut es obligatorio.</span>
