@@ -86,26 +86,28 @@ angular.module('personalizarSitioModule')
                 }
 
                 vm.init = function () {
-                	console.log("entre");
                     vm.cargarPerfil();
+                    vm.urlEncrypt = loginService.codigoCliente;//f9bfa23461a398a8f9687b4a70267e8d
+                    vm.codigo = loginService.codigo;//28
+                    vm.codigoCliente = loginService.codigoCliente;//2
+                    console.log("codigo: ", vm.codigo);
+                    console.log("codigoCliente: ", vm.codigoCliente);
                 }
 
                 vm.cargarPerfil = function () {
-                    $http.get(host + '/devolucionRest/rest/logistica/configuracion/ecommerce/f9bfa23461a398a8f9687b4a70267e8d')
+                    $http.get(host + '/devolucionRest/rest/logistica/personalizarSitio/listarAll?clienteCodigo='+loginService.codigoCliente)
                         .success(function (data) {
-                            console.log(data[0].frontEnd)
-
                             // temporal
-                            vm.config.imagen1.base64 = data[0].frontEnd.headerLogo;
-                            vm.config.imagen2.base64 = data[0].frontEnd.headerIcono;
-                            vm.config.colorFondo1 = data[0].frontEnd.backgroundColor;
-                            vm.config.textoTitulo1 = data[0].frontEnd.title;
-                            vm.config.textoTitulo2 = data[0].frontEnd.subtitle;
-                            vm.config.colorFondo2 = data[0].frontEnd.headerColourBottom;
-                            vm.config.colorTitulo2 = data[0].frontEnd.headerColourText;
-                            vm.config.textoTitulo3 = data[0].frontEnd.entryProduct;
-                            vm.config.colorFondo3 = data[0].frontEnd.entryColour;
-                            vm.config.colorBoton = data[0].frontEnd.entryValidateButton;
+                            vm.config.imagen1.base64 = data[0].headerLogo;
+                            vm.config.imagen2.base64 = data[0].headerIcono;
+                            vm.config.colorFondo1 = data[0].backgroundColor;
+                            vm.config.textoTitulo1 = data[0].title;
+                            vm.config.textoTitulo2 = data[0].subtitle;
+                            vm.config.colorFondo2 = data[0].headerColourBottom;
+                            vm.config.colorTitulo2 = data[0].headerColourText;
+                            vm.config.textoTitulo3 = data[0].entryProduct;
+                            vm.config.colorFondo3 = data[0].entryColour;
+                            vm.config.colorBoton = data[0].entryValidateButton;
 
                             vm.style = {
                                 titulo1: {
@@ -277,9 +279,10 @@ angular.module('personalizarSitioModule')
 
                 vm.guardar = function () {
                     vm.loadingGuardar = true;
+                    
                     const data = angular.copy(vm.config);
-                    data.codigo = 28;
-                    data.clienteCodigo = 2;
+                    data.codigo = vm.codigo;//28;
+                    data.clienteCodigo = vm.codigoCliente;//2;
                     data.estado = 1;
                     data.headerLogo = data.imagen1.base64;
                     data.headerIcono = data.imagen2.base64;

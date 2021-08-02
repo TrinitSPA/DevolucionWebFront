@@ -56,7 +56,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         .state('ingresar', {
             url: '/ingresar/:idEcommerce',
             controller: function($stateParams){
-		      $stateParams.idEcommerce  //*** Exists! ***//
+		      $stateParams.idEcommerce 
 		    },
 		    resolve:{
 		       contactId: ['$stateParams', function($stateParams){

@@ -1,7 +1,38 @@
 <div ng-controller="ingresoCtrl as inCtrl" ng-init="inCtrl.init()" class="clean-body m-0 p-0 personalizar-sitio"
 	style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%;">
-	<section class="hero-msg">
-		<div class="container">
+	<div style="background-color:#134085;">
+    <div class="block-grid" style="Margin: 0 auto; min-width: 320px; max-width: 800px; overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; background-color: #134085;">
+        <div style="border-collapse: collapse;display: table;width: 100%;background-color:#134085;">
+            <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#134085;"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:510px"><tr class="layout-full-width" style="background-color:#134085"><![endif]-->
+            <!--[if (mso)|(IE)]><td align="center" width="510" style="background-color:#134085;width:510px; border-top: 0px solid transparent; border-left: 0px solid transparent; border-bottom: 0px solid transparent; border-right: 0px solid transparent;" valign="top"><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 0px; padding-left: 0px; padding-top:20px; padding-bottom:20px;"><![endif]-->
+            <div class="col num12"
+                style="min-width: 320px; max-width: 800px; display: table-cell; vertical-align: top; width: 800px;">
+                <div style="width:100% !important;">
+                    <!--[if (!mso)&(!IE)]><!-->
+                    <div style="border-top:0px solid transparent; border-left:0px solid transparent; border-bottom:0px solid transparent; border-right:0px solid transparent; padding-top:10px; padding-bottom:10px; padding-right: 0px; padding-left: 0px;">
+                        <!--<![endif]-->
+                        <div align="center" class="img-container center autowidth" style="padding-right: 0px;padding-left: 0px;">
+                            <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px"><td style="padding-right: 0px;padding-left: 0px;" align="center"><![endif]--><a
+                                href="http://www.bluex.cl"><img align="center" alt="BluexEspress" border="0"
+                                    class="center autowidth" src="images/logo-blue.png"
+                                    style="text-decoration: none; -ms-interpolation-mode: bicubic; height: auto; border: 0; width: 100%; max-width: 60px; display: block;"
+                                    title="BluexEspress" width="60" /></a>
+                            <!--[if mso]></td></tr></table><![endif]-->
+                        </div>
+                        <!--[if (!mso)&(!IE)]><!-->
+                    </div>
+                    <!--<![endif]-->
+                </div>
+            </div>
+            <!--[if (mso)|(IE)]></td></tr></table><![endif]-->
+            <!--[if (mso)|(IE)]></td></tr></table></td></tr></table><![endif]-->
+        </div>
+    </div>
+</div>
+	<div class="block-grid w-100 container-fluid"
+		ng-style="inCtrl.style.colorFondo2">
+	<section>
+		<div class="container" >
 			<div class="row">
 				<div class="col-12 d-flex justify-content-between align-items-center">
 					<h2>{{inCtrl.config.textoTitulo1}}</h2>
@@ -14,14 +45,15 @@
 					<hr>
 				</div>
 				<div class="col-12">
-					<h6>
+					<h6 ng-style="inCtrl.style.titulo2">
 						{{inCtrl.config.textoTitulo2}}
 					</h6>
 				</div>
 			</div>
 		</div>
 	</section>
-	<form name="myForm">
+	</div>
+	<form name="myForm" ng-style="inCtrl.style.colorFondo3">
 		<div class="container mb-5" id="paso1" name="paso1">
 			<section class="etapas">
 				<div class="row justify-content-center mb-5 mt-2">
@@ -86,21 +118,21 @@
 			</section>
 		</div>
 	</form>
-	<form name="myForm2">
+	<form name="myForm2" ng-style="inCtrl.style.colorFondo3">
 		<!--paso2-->
 		<div class="container mb-5" id="paso2" name="paso2">
 			<section class="etapas">
 				<div class="row justify-content-center">
 					<div class="col-4 pr-0">
 						<div class="paso paso-uno align-items-start start">
-							<h5>PASO 1</h5>
+							<h6>PASO 1</h6>
 							<div class="circulo"></div>
 							<div class="linea"></div>
 						</div>
 					</div>
 					<div class="col-4 px-0">
 						<div class="paso paso-tres align-items-end done">
-							<h5>PASO 2</h5>
+							<h6>PASO 2</h6>
 							<div class="circulo"></div>
 							<div class="linea"></div>
 						</div>
@@ -109,8 +141,8 @@
 			</section>
 			<section class="inputs-forms mt-1">
 				<div class="row justify-content-center">
-					<h3 class="col-12 col-md-10 pl-0">DATOS PERSONALES</h3>
-					<div class="col-12 col-md-10 px-5 py-2 card-white">
+					<h5 class="col-12 col-md-10 pl-0">{{inCtrl.config.textoTitulo3}}</h5>
+					<div class="col-12 col-md-10 px-5 pt-3 card-white pb-4">
 						<div class="row">
 							<div class="col-12 col-md-6" id="validacion-live">
 								<div class="form-group">
@@ -143,7 +175,7 @@
 											<option value="2" selected="selected">2</option>
 											<option value="9">9</option>
 										</select>&nbsp;
-										<input type="text" style="width: 309px;!important" class="form-control"
+										<input type="text" style="width: 200px;!important" class="form-control"
 											ng-change="inCtrl.soloNumeros();" 
 											name="telefono" ng-model="inCtrl.formData.telefono" required
 											placeholder="12345678" maxlength="8">
@@ -167,9 +199,16 @@
 								<p>*Campos obligatorios</p>
 							</div>
 							<div class="col-12">
-								<button type="button" id="btnEnviar" ng-click="inCtrl.createTodo(myForm, myForm2)"
+								<button ng-if="!inCtrl.loadingGuardar" type="button" id="btnEnviar" ng-click="inCtrl.createTodo(myForm, myForm2)"
 									ng-disabled="myForm2.$invalid || !inCtrl.validarPaso2()"
 									class="btn btn-primary btn-lg btn-block">Enviar</button>
+								<button ng-if="inCtrl.loadingGuardar" type="button" class="btn btn-primary btn-lg btn-block">
+									<div class="spinner-button">
+										<div class="bounce1"></div>
+										<div class="bounce2"></div>
+										<div class="bounce3"></div>
+									</div>
+								</button>
 							</div>
 						</div>
 
@@ -179,7 +218,7 @@
 		</div>
 	</form>
 	<!--paso3-->
-	<div class="container mb-5" id="paso3" name="paso3">
+	<div class="container mb-5" id="paso3" name="paso3" ng-style="inCtrl.style.colorFondo3">
 		<section class="inputs-forms mt-3">
 			<div class="row justify-content-center">
 				<div class="col-12 col-md-10 px-5 py-2 card-white">
@@ -211,3 +250,4 @@
 		</div>
 	</div>
 </div>
+<div>sdf</div>

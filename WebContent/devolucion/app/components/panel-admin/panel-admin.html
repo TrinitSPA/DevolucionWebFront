@@ -1,18 +1,5 @@
 <!-- Panel de administracion  -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-md5/0.1.10/angular-md5.js"></script>
-
-
-<script>
-function myFunction() {
-    var x = document.getElementById("link");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
-</script>
-<div ng-controller="disenoConfigCtrl" class="clean-body">
+<div ng-controller="panelAdminCtrl as pnCtrl" ng-init="pnCtrl.init()" class="clean-body">
     <div class="container">
         <form name="myForm" novalidate></form>
             <div class="row">
@@ -24,19 +11,20 @@ function myFunction() {
                                 <form class="form-inline">
                                     <div class="form-group col-4 mx-sm-3 mb-2">
                                     <label for="inputPassword2" class="sr-only">Ingrese nombre de ecommerce</label>
-                                    <input type="text" name="input" value="80855-5" required ng-trim="false">&nbsp;
-                                    <button type="submit" class="btn btn-primary mb-2" onclick="myFunction()">Generar url</button>
+                                    <input type="text" id="nomEcommerce" ng-value="pnCtrl.nomEcommerce" 
+                                    required ng-trim="false" disabled>&nbsp;
+                                    <button type="submit" ng-click="pnCtrl.generaHash()" class="btn btn-primary mb-2">Generar url</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                        <div  id="link" style="display: none;" >
+                        <div  id="link" ng-if="pnCtrl.visible" >
                          <div class="d-flex align-items-center pl-4 mt-5 pt-4">
                             <img src="images/link-solid.svg" width="20" alt="" class="mr-2">
                             <p class="mr-2 mb-0 text-grey">
-                            	<code>http://portal2.bluex.cl/devolucionRest/devolucion/#/{{nombreUrl.text}}</code><br/>
+                            	<code>http://portal2.bluex.cl/devolucionRest/devolucion/#/ingresar/{{pnCtrl.eCommerceMd5}}</code><br/>
                             </p>
-                            <button type="button" class="btn btn-success  btn-sm">Copiar url1</button>
+                            <button type="button" class="btn btn-success  btn-sm">Copiar url</button>
                         </div>
                         </div>
                        
@@ -60,7 +48,7 @@ function myFunction() {
                         </div>
                     </div>
                 </div>
-                <div class="col-12 mt-5">
+                <div class="col-12 mt-5" ng-if="pnCtrl.visible">
                     <div class="card mt-5 p-2 pb-3">
                         <div class="row pl-3">
                             <div class="col-12 pt-3">
@@ -68,18 +56,26 @@ function myFunction() {
                             </div>
                             <div class="col-12 pt-3">
                                  <p class="text-grey">
-                                	&lt;iframe src="http://portal2.bluex.cl/devolucionRest/devolucion/#/{{nombreUrl.text}}" title="personaliza tu sitio" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+                                	&lt;iframe src="http://portal2.bluex.cl/devolucionRest/devolucion/#/ingresar/{{pnCtrl.eCommerceMd5}}" title="personaliza tu sitio" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
                                 </p>
                             </div>
                             <div class="col-12 pl-3">
-                                <button type="button" class="btn btn-success btn-sm">Copiar código</button>
+                                <button type="button" ng-if="pnCtrl.visible" class="btn btn-success btn-sm">Copiar código</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 text-right pt-3">
-                    <button type="button" onclick="window.location='#dashboard-edicion'" class="btn btn-secondary">Volver</button>
-                </div>
+                <div class="col-12 text-right">
+					<button ng-if="!pnCtrl.loadingGuardar" type="button" class="btn btn-success"
+						ng-click="pnCtrl.guardar()">Guardar cambios</button>
+					<button ng-if="pnCtrl.loadingGuardar" type="button" class="btn btn-success">
+						<div class="spinner-button">
+							<div class="bounce1"></div>
+							<div class="bounce2"></div>
+							<div class="bounce3"></div>
+						</div>
+					</button>
+				</div>
             </div>
     </div>
 

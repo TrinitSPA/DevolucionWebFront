@@ -5,10 +5,11 @@ angular.module('productosModule')
         '$state',
         '$filter',
         'productoService',
+        'loginService',
         '$location',
-        function ($scope, $http, $state, $filter, productoService, $location) {
+        function ($scope, $http, $state, $filter, productoService, loginService, $location) {
             var vm = this;
-            var host = $location.protocol() + '://' + $location.host() + ':' + $location.port();
+            var host = $location.protocol() + '://' + $location.host() + ':8081';
             vm.today = moment().add(1, 'days').format('YYYY-MM-DD');
             vm.dateRange = 90;
             vm.minDate = '2020-11-01';
@@ -35,19 +36,27 @@ angular.module('productosModule')
             vm.producto;
 
             vm.buscar = function () {
+            	console.log("codigoCliente: ", loginService.codigoCliente);
             	console.log("desde: " + vm.desde);
             	console.log("hasta" + vm.hasta);
             	var filtroFechas = {
+            			"clienteCodigo":1,
                         "fechaInicio": vm.desde,
-                        "fechaFin": vm.hasta
+                        "fechaTermino": vm.hasta
                     };
+                var config = {
+				 params: filtroFechas,
+				 headers : {'Accept' : 'application/json'}
+				};
                 vm.error = false;
                 vm.loadingProductos = true;
                 vm.producto = undefined;
-                $http.post(host + '/devolucionRest/rest/logistica/dashboard/eCommerce', filtroFechas)
+                $http.get(host + '/devolucionRest/rest/logistica/devolucion/listar', config)
                     .success(function (data) {
                     	if(data === "false"){
-                    		$state.go('login');
+                    		alert("aqui");
+                    		
+                    		//$state.go('login');
                     	}else{                    		
                     		vm.productos = data.lstDevoluciones;
                     		vm.filtrar();
@@ -97,14 +106,14 @@ angular.module('productosModule')
                 vm.mensajeActualizacion = "Enviando actualización..."
                 $("#myModal").modal('show');
                 var dataUpd = {
-                    "codigoDevolucion": vm.producto.cdgSeqReq,
-                    "motivoDevolucion": vm.producto.accion,
-                    "descripcionDevolucion": vm.producto.motivo,
+                    "codigo": vm.producto.cdgSeqReq,
+                    "estado": vm.producto.accion,
+                    "descripcion": vm.producto.motivo,
                     "nombreCliente": vm.producto.nombreCliente,
                     "emailCliente": vm.producto.emailCliente,
                     "numeroRequerimiento": vm.producto.numeroRequerimiento
                 };
-                $http.post(host + '/devolucionRest/rest/logistica/dashboard/updateDevolucion', dataUpd)
+                $http.put(host + '/devolucionRest/rest/logistica/devolucion/actualizar', dataUpd)
                     .success(function (data) {
                         vm.mensajeActualizacion = 'Se ha realizado la actualización de manera Exitosa.';
                     })

@@ -1,0 +1,1 @@
+angular.module('panelAdminModule', ['angular-md5']);

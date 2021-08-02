@@ -8,5 +8,7 @@ var app = angular.module("myApp", [
     'loginModule',
     'productosModule',
     'personalizarSitioModule',
-    'reportesModule'
+    'reportesModule',
+    'panelAdminModule',
+    'dashboardModule'
 ]);

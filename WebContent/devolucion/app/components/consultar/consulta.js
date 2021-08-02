@@ -3,13 +3,13 @@ angular.module('consultaModule')
         ['$scope', '$http', '$state', 'consultaService', '$location',
             function ($scope, $http, $state, consultaService, $location) {
                 var vm = this;
-                var host = $location.protocol()+'://'+$location.host()+':'+$location.port();
+                var host = $location.protocol()+'://'+$location.host()+':8081';
                 vm.mostrarMensaje = false;
                 vm.estado = "";
                 vm.numeroOC = $location.search().numeroOC;
                 vm.buscarDevolucion = function () {
 
-                    $http.get(host+'/devolucionRest/rest/logistica/devolucionClient/' + vm.numeroOC)
+                    $http.get(host+'/devolucionRest/rest/logistica/devolucion/solicitud/' + vm.numeroOC)
                         .success(function (data) {
                             console.log(data);
                             if (null != data.estadoDevolucion) {

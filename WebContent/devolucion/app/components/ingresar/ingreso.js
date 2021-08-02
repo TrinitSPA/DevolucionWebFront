@@ -7,6 +7,7 @@ angular.module('ingresoModule')
             
             vm.formData = {
             };
+            vm.loadingGuardar = false;
             vm.errors = {};
             vm.config = {
                     textoTitulo1: "Devolución Web1",
@@ -57,10 +58,13 @@ angular.module('ingresoModule')
                 }
                 
             vm.createTodo = function (form1, form2) {
+            	vm.loadingGuardar = true;
                 var dataEnviar = angular.copy(vm.formData);
-                dataEnviar.codigoEmpresa = dataEnviar.codigoEmpresa.codigoEmpresa;
-                dataEnviar.codigoMotivo = dataEnviar.codigoMotivo.codigoMotivo;
-                $http.post(host + '/devolucionRest/rest/logistica/insertDevolutionClient/', dataEnviar)
+                dataEnviar.ecommerce = vm.formData.eCommerce;
+                dataEnviar.motivo = 1;
+				dataEnviar.descripcion = vm.formData.tipoProducto; 
+				dataEnviar.identificador = vm.formData.rut;
+                $http.post(host + '/devolucionRest/rest/logistica/devolucion/crear', dataEnviar)
                     .success(function (data) {
                         const usuario = vm.formData.nombre;
                         $scope.formData = {};
@@ -75,8 +79,9 @@ angular.module('ingresoModule')
                         $('#retornaDevolucion').html('<h4><strong><b>¡Hemos recibido tu solicitud!</b></strong></h4><br>' +
                             '<h4>Ya fue enviada a la Tienda con fecha <b style=color:#0033a0;>' + vm.hoy + '</b>, puedes <br>' + 
                             ' revisar la confirmación de la solicitud en tu email. </h4>'+
-                            '<h4><b style=color:#0033a0;>Número de Devolución: '+data.idNumeroRequerimiento+'</b></h4>');
+                            '<h4><b style=color:#0033a0;>Número de Devolución: '+data.solicitud+'</b></h4>');
                         $('#paso2').hide();
+                        vm.loadingGuardar = false;
                     })
                     .error(function (data) {
                         console.log('Error:' + data);
@@ -117,9 +122,9 @@ angular.module('ingresoModule')
                     $('#paso2').show();
                     $('#paso3').hide();
             	} else {
-            		$http.get(host + '/devolucionRest/rest/logistica/ordenServicio/listar?clienteCodigo=' + vm.formData.eCommerce + '&numeroDocumento=' + vm.formData.ordenCompra)
+            		$http.get(host + '/devolucionRest/rest/logistica/ordenServicio/listar?clienteCodigo=' + loginServicio.codigoCliente + '&numeroDocumento=' + vm.formData.ordenCompra)
                     .success(function (data) {
-                        if (true == data) {
+                        if (data.length > 0) {
                             $('#paso1').hide();
                             $('#paso2').show();
                             $('#paso3').hide();
@@ -201,7 +206,10 @@ angular.module('ingresoModule')
             vm.cargarPerfil = function () {
             		//f9bfa23461a398a8f9687b4a70267e8d
             		if("generic" !== urlEncrip){
+            			console.log("entro a cargar info");
             			vm.cargarInfoPerfil();
+            		} else {
+            			console.log("No entro a cargar info");
             		}
             }
             
@@ -222,7 +230,10 @@ angular.module('ingresoModule')
                             vm.config.textoTitulo3 = data[0].frontEnd.entryProduct;
                             vm.config.colorFondo3 = data[0].frontEnd.entryColour;
                             vm.config.colorBoton = data[0].frontEnd.entryValidateButton;
-
+							console.log("colorFondo1: " + vm.config.colorFondo1);
+							console.log("colorTitulo2: " + vm.config.colorTitulo2);
+							console.log("colorTitulo2: " + vm.style.titulo2);
+							console.log("colorTitulo3: " + vm.config.colorTitulo3);
                             vm.style = {
                                 titulo1: {
                                     color: "#" + vm.config.colorTitulo1
@@ -234,7 +245,7 @@ angular.module('ingresoModule')
                                     "background-color": "#" + vm.config.colorFondo1
                                 },
                                 colorFondo2: {
-                                    background: "#" + vm.config.colorFondo2
+                                    background: "linear-gradient(#" + vm.config.colorFondo2+",#C2E6F3)"
                                 },
                                 colorFondo3: {
                                     background: "#" + vm.config.colorFondo3
@@ -257,5 +268,8 @@ angular.module('ingresoModule')
                         });
             }
 
+			vm.guardar = function () {
+                    vm.loadingGuardar = true;
+            }
 
         }]);
